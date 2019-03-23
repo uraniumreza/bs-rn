@@ -1,0 +1,3 @@
+rootProject.name = 'bsRN'
+
+include ':app'
