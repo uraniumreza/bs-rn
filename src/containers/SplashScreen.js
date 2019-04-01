@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import styles from '../styles/CommonStyles';
+import {
+  View, Text, Image, StyleSheet,
+} from 'react-native';
+import commonStyles from '../styles/CommonStyles';
+import theme from '../styles/Theme';
+import logoImage from '../../assets/images/BS_LOGO.png';
+
+const { width } = theme;
 
 class SplashScreen extends Component {
   constructor(props) {
@@ -11,18 +17,28 @@ class SplashScreen extends Component {
   componentDidMount() {
     const { navigation } = this.props;
     setTimeout(() => {
-      navigation.navigate('App');
-    }, 2000);
+      navigation.navigate('Login');
+    }, 1000);
   }
 
   render() {
-    const { container, welcome } = styles;
+    const { container, welcome } = commonStyles;
+    const { logo } = styles;
     return (
       <View style={container}>
-        <Text style={welcome}>SPLASH SCREEN</Text>
+        <Image style={logo} source={logoImage} />
+        <Text style={welcome}>BARBER SALOON</Text>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  logo: {
+    width: width * 0.3,
+    height: width * 0.3,
+    resizeMode: 'contain',
+  },
+});
 
 export default SplashScreen;

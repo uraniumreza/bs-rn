@@ -8,9 +8,11 @@ const CommonStyles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 17,
+    fontWeight: '600',
     textAlign: 'center',
     margin: 10,
+    letterSpacing: 3,
   },
   instructions: {
     textAlign: 'center',
