@@ -6,6 +6,7 @@ const CommonStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    position: 'relative',
   },
   welcome: {
     fontSize: 17,

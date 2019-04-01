@@ -16,6 +16,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react'],
+  parser: 'babel-eslint',
   rules: {
     'react/jsx-filename-extension': 0,
     'default-case': 0,
