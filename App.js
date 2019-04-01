@@ -36,24 +36,27 @@ const transitionConfig = () => ({
 
 const appStack = createMaterialBottomTabNavigator(
   {
-    Home: {
+    Cosmetics: {
       screen: Cosmetics,
       navigationOptions: {
         tabBarLabel: 'Cosmetics',
+        tabBarIcon: ({ tintColor }) => <Icon name="slack" size={19} color={tintColor} />,
       },
     },
 
-    Quiz: {
+    Electronics: {
       screen: Electronics,
       navigationOptions: {
         tabBarLabel: 'Electronics',
+        tabBarIcon: ({ tintColor }) => <Icon name="API" size={19} color={tintColor} />,
       },
     },
 
-    PreviousQs: {
+    Accessories: {
       screen: Accessories,
       navigationOptions: {
         tabBarLabel: 'Accessories',
+        tabBarIcon: ({ tintColor }) => <Icon name="USB" size={19} color={tintColor} />,
       },
     },
 
@@ -61,12 +64,13 @@ const appStack = createMaterialBottomTabNavigator(
       screen: Profile,
       navigationOptions: {
         tabBarLabel: 'Profile',
-        tabBarIcon: ({ tintColor }) => <Icon name="user" size={17} color={tintColor} />,
+        tabBarIcon: ({ tintColor }) => <Icon name="user" size={19} color={tintColor} />,
       },
     },
   },
   {
-    shifting: true,
+    shifting: false,
+    labeled: true,
     activeColor: Theme.Primary,
     inactiveColor: Theme.Secondary,
     barStyle: {
