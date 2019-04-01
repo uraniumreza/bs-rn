@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import Icon from 'react-native-vector-icons/AntDesign';
 import { Animated, Easing } from 'react-native';
 import Theme from './src/styles/Theme';
 import Cosmetics from './src/containers/Cosmetics';
@@ -59,6 +61,7 @@ const appStack = createMaterialBottomTabNavigator(
       screen: Profile,
       navigationOptions: {
         tabBarLabel: 'Profile',
+        tabBarIcon: ({ tintColor }) => <Icon name="user" size={17} color={tintColor} />,
       },
     },
   },

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { View, Text } from 'react-native';
+import styles from '../styles/CommonStyles';
 
 class SplashScreen extends Component {
   constructor(props) {
@@ -7,8 +8,20 @@ class SplashScreen extends Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    const { navigation } = this.props;
+    setTimeout(() => {
+      navigation.navigate('App');
+    }, 2000);
+  }
+
   render() {
-    return <Text>SPLASH SCREEN</Text>;
+    const { container, welcome } = styles;
+    return (
+      <View style={container}>
+        <Text style={welcome}>SPLASH SCREEN</Text>
+      </View>
+    );
   }
 }
 

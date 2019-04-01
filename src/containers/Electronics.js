@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { View, Text } from 'react-native';
+import styles from '../styles/CommonStyles';
 
 class Electronics extends Component {
   constructor(props) {
@@ -8,7 +9,12 @@ class Electronics extends Component {
   }
 
   render() {
-    return <Text>ELECTRONICS</Text>;
+    const { container, welcome } = styles;
+    return (
+      <View style={container}>
+        <Text style={welcome}>ELECTRONICS</Text>
+      </View>
+    );
   }
 }
 

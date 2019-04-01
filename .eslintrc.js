@@ -19,5 +19,6 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': 0,
     'default-case': 0,
+    'react/prop-types': ['error', { ignore: ['navigation'] }],
   },
 };
