@@ -31,15 +31,12 @@ const login = (phone, password) => {
     password,
   };
 
-  return api
-    .post('/auth/login/', data)
-    .then(res => res.data)
-    .then(({ token, user }) => {
-      setToAS('TOKEN', token);
-      setToAS('USER', user);
-      setToAS('AUTH', data);
-      store.dispatch(setTokens(token));
-    });
+  return api.post('/auth/login/', data).then(({ token, user }) => {
+    setToAS('TOKEN', token);
+    setToAS('USER', user);
+    setToAS('AUTH', data);
+    store.dispatch(setTokens(token));
+  });
 };
 
 export { getFromAS, setToAS, login };
