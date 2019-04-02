@@ -18,8 +18,9 @@ class SplashScreen extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
-      this.setState({ phase: 2 });
+      // LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
+      // this.setState({ phase: 2 });
+      this.navigate('App');
     }, 1000);
   }
 
@@ -43,13 +44,13 @@ class SplashScreen extends Component {
         ) : (
           <View style={buttonContainer}>
             <TouchableOpacity
-              style={{ ...button, backgroundColor: Primary }}
+              style={[button, { backgroundColor: Primary }]}
               onPress={() => this.navigate('Login')}
             >
               <Text style={buttonText}>REGISTER</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={{ ...button, backgroundColor: Secondary }}
+              style={[button, { backgroundColor: Secondary }]}
               onPress={() => this.navigate('Login')}
             >
               <Text style={buttonText}>LOGIN</Text>
