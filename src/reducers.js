@@ -2,6 +2,7 @@ import ACTION_TYPES from './constants/ActionTypes';
 
 const initialState = {
   temporaryValue: 1,
+  tokens: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,6 +14,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         temporaryValue: temporaryValue + payload,
+      };
+    }
+
+    case ACTION_TYPES.SET_TOKENS: {
+      return {
+        ...state,
+        tokens: payload,
       };
     }
   }

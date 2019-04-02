@@ -1,10 +1,11 @@
 import ACTION_TYPES from './constants/ActionTypes';
 
-const actions = {
-  add: value => ({
-    type: ACTION_TYPES.ADD,
-    payload: value,
-  }),
-};
+export const add = value => ({
+  type: ACTION_TYPES.ADD,
+  payload: value,
+});
 
-export default actions;
+export const setTokens = tokens => ({
+  type: ACTION_TYPES.SET_TOKENS,
+  payload: tokens,
+});

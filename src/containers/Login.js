@@ -3,6 +3,7 @@ import {
   View, Text, StyleSheet, TextInput, TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { login } from '../utils/AuthService';
 import theme from '../styles/Theme';
 import commonStyles from '../styles/CommonStyles';
 
@@ -16,8 +17,10 @@ class Login extends Component {
     };
   }
 
-  login = () => {
+  login = async () => {
+    const { contactNo, password } = this.state;
     const { navigation } = this.props;
+    await login(contactNo, password);
     navigation.navigate('App');
   };
 

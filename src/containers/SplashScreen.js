@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   View, Text, Image, StyleSheet, LayoutAnimation, TouchableOpacity,
 } from 'react-native';
+import { connect } from 'react-redux';
 import commonStyles from '../styles/CommonStyles';
 import theme from '../styles/Theme';
+import { getFromAS } from '../utils/AuthService';
 import logoImage from '../../assets/images/BS_LOGO.png';
+import { setTokens } from '../actions';
 
 const { width, Primary, Secondary } = theme;
+const mapDispatchToProps = { setTokens };
 
 class SplashScreen extends Component {
   constructor(props) {
@@ -17,11 +22,20 @@ class SplashScreen extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      // LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
-      // this.setState({ phase: 2 });
-      this.navigate('App');
-    }, 1000);
+    getFromAS('AUTH').then(async (data) => {
+      if (!data) {
+        setTimeout(() => {
+          LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
+          this.setState({ phase: 2 });
+        }, 1500);
+      } else {
+        await getFromAS('TOKEN').then((value) => {
+          const { setTokens } = this.props;
+          setTokens(value);
+        });
+        this.navigate('App');
+      }
+    });
   }
 
   navigate = (screen) => {
@@ -94,4 +108,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SplashScreen;
+SplashScreen.propTypes = {
+  setTokens: PropTypes.func.isRequired,
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(SplashScreen);

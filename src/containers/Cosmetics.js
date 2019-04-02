@@ -3,12 +3,18 @@ import { View, Text } from 'react-native';
 import styles from '../styles/CommonStyles';
 import ProductThumbnail from '../components/ProductThumbnail';
 import theme from '../styles/Theme';
+import api from '../utils/API';
 
 const { width } = theme;
 class Cosmetics extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  componentDidMount() {
+    const url = '/products/?category=Cosmetics';
+    api.get(url).then(res => console.log(res));
   }
 
   render() {
