@@ -1,28 +1,35 @@
 import React from 'react';
 import {
-  View, Text, Image, StyleSheet, TouchableWithoutFeedback,
+  View, Text, Image, StyleSheet, TouchableNativeFeedback,
 } from 'react-native';
 import theme from '../styles/Theme';
 
 const { width } = theme;
 
-const ProductThumbnail = props => (
-  <TouchableWithoutFeedback>
-    <View style={styles.container}>
-      <Image
-        source={{ uri: 'https://images-na.ssl-images-amazon.com/images/I/41PDBY-5cfL._UL900_.jpg' }}
-        style={styles.image}
-      />
-      <Text style={styles.name} numberOfLines={2}>
-        Conair Infiniti Pro Dryer, DC Motor/Salon Performance Styling Tool
-      </Text>
-      <View style={{ flexDirection: 'row' }}>
-        <Text style={styles.price}>300</Text>
-        <Text style={styles.taka}>{'\u09F3'}</Text>
+const ProductThumbnail = (props) => {
+  const {
+    container, image, name, priceContainer, price, taka,
+  } = styles;
+  return (
+    <TouchableNativeFeedback>
+      <View style={container}>
+        <Image
+          source={{
+            uri: 'https://images-na.ssl-images-amazon.com/images/I/41PDBY-5cfL._UL900_.jpg',
+          }}
+          style={image}
+        />
+        <Text style={name} numberOfLines={2}>
+          Conair Infiniti Pro Dryer, DC Motor/Salon Performance Styling Tool
+        </Text>
+        <View style={priceContainer}>
+          <Text style={price}>300</Text>
+          <Text style={taka}>{'\u09F3'}</Text>
+        </View>
       </View>
-    </View>
-  </TouchableWithoutFeedback>
-);
+    </TouchableNativeFeedback>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -44,12 +51,19 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#161925',
   },
+  priceContainer: {
+    flexDirection: 'row',
+  },
   price: {
     marginTop: 5,
     fontSize: 14,
     color: '#444',
   },
-  taka: { fontSize: 11, lineHeight: 20, color: '#333' },
+  taka: {
+    fontSize: 11,
+    lineHeight: 20,
+    color: '#333',
+  },
 });
 
 export default ProductThumbnail;
