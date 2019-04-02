@@ -51,7 +51,7 @@ class Login extends Component {
 
         <TouchableOpacity style={loginButton} onPress={this.login}>
           <Text style={loginButtonText}>
-            Next
+            NEXT
             <Icon name="caretright" size={18} />
           </Text>
         </TouchableOpacity>
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     height: 55,
   },
   loginButtonText: {
-    fontSize: 20,
+    fontSize: 19,
     fontWeight: '400',
     textAlign: 'left',
     letterSpacing: 1,
