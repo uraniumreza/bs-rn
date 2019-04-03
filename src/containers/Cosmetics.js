@@ -18,10 +18,9 @@ class Cosmetics extends Component {
   }
 
   render() {
-    const { container, welcome } = styles;
+    const { scrollableContainer } = styles;
     return (
-      <View style={container}>
-        <Text style={welcome}>COSMETICS</Text>
+      <View style={scrollableContainer}>
         <View
           style={{
             width: width * 0.93,

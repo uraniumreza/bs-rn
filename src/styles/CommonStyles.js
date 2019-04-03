@@ -8,6 +8,13 @@ const CommonStyles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
     position: 'relative',
   },
+  scrollableContainer: {
+    flex: 1,
+    alignItems: 'center',
+    paddingTop: 10,
+    backgroundColor: '#F5FCFF',
+    position: 'relative',
+  },
   welcome: {
     fontSize: 17,
     fontWeight: '600',
