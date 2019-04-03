@@ -2,18 +2,23 @@ import React from 'react';
 import {
   View, Text, Image, StyleSheet, TouchableNativeFeedback,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import { withNavigation } from 'react-navigation';
 import theme from '../styles/Theme';
 
 const { width } = theme;
 
-const ProductThumbnail = (props) => {
+const ProductThumbnail = ({
+  navigation,
+  product: {
+    image: productImage, name: productName, price: originalPrice, discount,
+  },
+}) => {
   const {
     container, image, name, priceContainer, price, taka,
   } = styles;
 
   const navigateToProductDetail = () => {
-    const { navigation } = props;
     navigation.navigate('ProductDetail');
   };
 
@@ -22,15 +27,15 @@ const ProductThumbnail = (props) => {
       <View style={container}>
         <Image
           source={{
-            uri: 'https://images-na.ssl-images-amazon.com/images/I/41PDBY-5cfL._UL900_.jpg',
+            uri: productImage,
           }}
           style={image}
         />
         <Text style={name} numberOfLines={2}>
-          Conair Infiniti Pro Dryer, DC Motor/Salon Performance Styling Tool
+          {productName}
         </Text>
         <View style={priceContainer}>
-          <Text style={price}>300</Text>
+          <Text style={price}>{originalPrice - discount}</Text>
           <Text style={taka}>{'\u09F3'}</Text>
         </View>
       </View>
@@ -42,7 +47,8 @@ const styles = StyleSheet.create({
   container: {
     width: width * 0.45,
     padding: 10,
-    marginBottom: width * 0.03,
+    marginBottom: width * 0.035,
+    marginLeft: width * 0.033,
     backgroundColor: '#ffffff',
     borderWidth: 0.5,
     borderColor: '#d5d6d9',
@@ -72,5 +78,14 @@ const styles = StyleSheet.create({
     color: '#333',
   },
 });
+
+ProductThumbnail.propTypes = {
+  product: PropTypes.shape({
+    image: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    discount: PropTypes.number.isRequired,
+  }).isRequired,
+};
 
 export default withNavigation(ProductThumbnail);

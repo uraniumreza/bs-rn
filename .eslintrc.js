@@ -22,5 +22,6 @@ module.exports = {
     'default-case': 0,
     'react/prop-types': ['error', { ignore: ['navigation'] }],
     'no-use-before-define': ['error', { variables: false }],
+    'no-underscore-dangle': ['error', { allow: ['_id'] }],
   },
 };

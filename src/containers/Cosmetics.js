@@ -1,42 +1,45 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, ActivityIndicator, FlatList } from 'react-native';
 import styles from '../styles/CommonStyles';
 import ProductThumbnail from '../components/ProductThumbnail';
 import theme from '../styles/Theme';
 import api from '../utils/API';
 
-const { width } = theme;
+const { Secondary } = theme;
 class Cosmetics extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      products: [],
+      isLoading: true,
+    };
   }
 
   componentDidMount() {
     const url = '/products/?category=Cosmetics';
-    api.get(url).then(res => console.log(res));
+    api.get(url).then(data => this.setState({ products: data, isLoading: false }));
   }
 
   render() {
-    const { scrollableContainer } = styles;
-    return (
-      <View style={scrollableContainer}>
-        <View
-          style={{
-            width: width * 0.93,
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
-          <ProductThumbnail />
-          <ProductThumbnail />
-          <ProductThumbnail />
-          <ProductThumbnail />
+    const { container } = styles;
+    const { isLoading, products } = this.state;
+    console.log(products);
+
+    if (isLoading) {
+      return (
+        <View style={container}>
+          <ActivityIndicator size="large" color={Secondary} />
         </View>
-      </View>
+      );
+    }
+    return (
+      <FlatList
+        contentContainerStyle={{ paddingVertical: 15 }}
+        data={products}
+        renderItem={({ item }) => <ProductThumbnail product={item} />}
+        keyExtractor={item => item.id}
+        numColumns={2}
+      />
     );
   }
 }
