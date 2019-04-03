@@ -4,9 +4,7 @@ import { createSwitchNavigator, createStackNavigator, createAppContainer } from 
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Theme from './src/styles/Theme';
-import Cosmetics from './src/containers/Cosmetics';
-import Electronics from './src/containers/Electronics';
-import Accessories from './src/containers/Accessories';
+import ProductsList from './src/containers/ProductsList';
 import Login from './src/containers/Login';
 import Profile from './src/containers/Profile';
 import SplashScreen from './src/containers/SplashScreen';
@@ -41,7 +39,7 @@ const transitionConfig = () => ({
 const homeTabs = createMaterialBottomTabNavigator(
   {
     Cosmetics: {
-      screen: Cosmetics,
+      screen: () => <ProductsList category="Cosmetics" />,
       navigationOptions: {
         tabBarLabel: 'Cosmetics',
         tabBarIcon: ({ tintColor }) => <Icon name="slack" size={19} color={tintColor} />,
@@ -49,7 +47,7 @@ const homeTabs = createMaterialBottomTabNavigator(
     },
 
     Electronics: {
-      screen: Electronics,
+      screen: () => <ProductsList category="Electronics" />,
       navigationOptions: {
         tabBarLabel: 'Electronics',
         tabBarIcon: ({ tintColor }) => <Icon name="API" size={19} color={tintColor} />,
@@ -57,7 +55,7 @@ const homeTabs = createMaterialBottomTabNavigator(
     },
 
     Accessories: {
-      screen: Accessories,
+      screen: () => <ProductsList category="Accessories" />,
       navigationOptions: {
         tabBarLabel: 'Accessories',
         tabBarIcon: ({ tintColor }) => <Icon name="USB" size={19} color={tintColor} />,

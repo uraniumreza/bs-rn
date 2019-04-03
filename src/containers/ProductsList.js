@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, ActivityIndicator, FlatList } from 'react-native';
 import styles from '../styles/CommonStyles';
 import ProductThumbnail from '../components/ProductThumbnail';
@@ -6,7 +7,8 @@ import theme from '../styles/Theme';
 import api from '../utils/API';
 
 const { Secondary } = theme;
-class Cosmetics extends Component {
+
+class ProductList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,14 +18,14 @@ class Cosmetics extends Component {
   }
 
   componentDidMount() {
-    const url = '/products/?category=Cosmetics';
+    const { category } = this.props;
+    const url = `/products/?category=${category}`;
     api.get(url).then(data => this.setState({ products: data, isLoading: false }));
   }
 
   render() {
     const { container } = styles;
     const { isLoading, products } = this.state;
-    console.log(products);
 
     if (isLoading) {
       return (
@@ -32,6 +34,7 @@ class Cosmetics extends Component {
         </View>
       );
     }
+
     return (
       <FlatList
         contentContainerStyle={{ paddingVertical: 15 }}
@@ -44,4 +47,8 @@ class Cosmetics extends Component {
   }
 }
 
-export default Cosmetics;
+ProductList.propTypes = {
+  category: PropTypes.string.isRequired,
+};
+
+export default ProductList;
