@@ -26,6 +26,10 @@ const CommonStyles = StyleSheet.create({
     resizeMode: 'contain',
     marginLeft: 15,
   },
+  headerButton: {
+    marginRight: 15,
+    position: 'relative',
+  },
   badge: {
     width: 8,
     height: 8,

@@ -14,9 +14,20 @@ import Profile from './src/containers/Profile';
 import SplashScreen from './src/containers/SplashScreen';
 import ProductDetail from './src/containers/ProductDetail';
 import Bag from './src/containers/Bag';
-
+import BagIcon from './src/components/BagIcon';
 import styles from './src/styles/CommonStyles';
 import BrandLogo from './assets/images/BS_Trading.png';
+
+import store from './src/store';
+
+let cartLength;
+const select = state => state.cart.length;
+
+const listener = () => {
+  cartLength = select(store.getState());
+};
+
+store.subscribe(listener);
 
 const transitionConfig = () => ({
   transitionSpec: {
@@ -91,17 +102,7 @@ const appStack = createStackNavigator(
       screen: homeTabs,
       navigationOptions: ({ navigation }) => ({
         headerTitle: <Image style={styles.headerImage} source={BrandLogo} />,
-        headerRight: (
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Bag')}
-            style={{ marginRight: 15, position: 'relative' }}
-          >
-            <Icon name="shoppingcart" size={20} color="#616161" />
-            <View
-              style={styles.badge}
-            />
-          </TouchableOpacity>
-        ),
+        headerRight: <BagIcon />,
       }),
     },
     ProductDetail,

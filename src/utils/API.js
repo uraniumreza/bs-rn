@@ -1,15 +1,13 @@
 import axios from 'axios';
 import store from '../store';
 
-function select(state) {
-  return state.tokens.accessToken;
-}
+const select = state => state.tokens.accessToken;
 
-function listener() {
+const listener = () => {
   const jwt = select(store.getState());
   axios.defaults.withCredentials = true;
   axios.defaults.headers.common.Authorization = `Bearer ${jwt}`;
-}
+};
 
 store.subscribe(listener);
 
