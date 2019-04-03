@@ -3,7 +3,7 @@ import { Text, View, Button } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import actions from '../actions';
+import { add } from '../actions';
 import CommonStyles from '../styles/CommonStyles';
 
 const mapStateToProps = state => ({
@@ -16,7 +16,7 @@ const Counter = (props) => {
     <View>
       <Text style={CommonStyles.instructions}>{value}</Text>
       <Button
-        onPress={() => dispatch(actions.add(value))}
+        onPress={() => dispatch(add(value))}
         title="Add value"
         color="#841584"
         accessibilityLabel="Add this value"

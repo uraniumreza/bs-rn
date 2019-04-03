@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Animated, Easing, Image, TouchableOpacity, View,
-} from 'react-native';
+import { Animated, Easing, Image } from 'react-native';
 import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -17,17 +15,6 @@ import Bag from './src/containers/Bag';
 import BagIcon from './src/components/BagIcon';
 import styles from './src/styles/CommonStyles';
 import BrandLogo from './assets/images/BS_Trading.png';
-
-import store from './src/store';
-
-let cartLength;
-const select = state => state.cart.length;
-
-const listener = () => {
-  cartLength = select(store.getState());
-};
-
-store.subscribe(listener);
 
 const transitionConfig = () => ({
   transitionSpec: {
@@ -102,7 +89,7 @@ const appStack = createStackNavigator(
       screen: homeTabs,
       navigationOptions: ({ navigation }) => ({
         headerTitle: <Image style={styles.headerImage} source={BrandLogo} />,
-        headerRight: <BagIcon />,
+        headerRight: <BagIcon navigation={navigation} />,
       }),
     },
     ProductDetail,

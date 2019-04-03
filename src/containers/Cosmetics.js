@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 import styles from '../styles/CommonStyles';
 import ProductThumbnail from '../components/ProductThumbnail';
 import theme from '../styles/Theme';
