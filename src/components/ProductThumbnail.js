@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View, Text, Image, StyleSheet, TouchableNativeFeedback,
 } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import theme from '../styles/Theme';
 
 const { width } = theme;
@@ -10,8 +11,14 @@ const ProductThumbnail = (props) => {
   const {
     container, image, name, priceContainer, price, taka,
   } = styles;
+
+  const navigateToProductDetail = () => {
+    const { navigation } = props;
+    navigation.navigate('ProductDetail');
+  };
+
   return (
-    <TouchableNativeFeedback>
+    <TouchableNativeFeedback onPress={navigateToProductDetail}>
       <View style={container}>
         <Image
           source={{
@@ -66,4 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductThumbnail;
+export default withNavigation(ProductThumbnail);

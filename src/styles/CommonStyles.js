@@ -20,6 +20,21 @@ const CommonStyles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  headerImage: {
+    width: 100,
+    height: 50,
+    resizeMode: 'contain',
+    marginLeft: 15,
+  },
+  badge: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#52C41A',
+    position: 'absolute',
+    top: 0,
+    right: -2,
+  },
 });
 
 export default CommonStyles;

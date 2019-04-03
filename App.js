@@ -1,8 +1,10 @@
 import React from 'react';
+import {
+  Animated, Easing, Image, TouchableOpacity, View,
+} from 'react-native';
 import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { Animated, Easing } from 'react-native';
 import Theme from './src/styles/Theme';
 import Cosmetics from './src/containers/Cosmetics';
 import Electronics from './src/containers/Electronics';
@@ -10,6 +12,11 @@ import Accessories from './src/containers/Accessories';
 import Login from './src/containers/Login';
 import Profile from './src/containers/Profile';
 import SplashScreen from './src/containers/SplashScreen';
+import ProductDetail from './src/containers/ProductDetail';
+import Bag from './src/containers/Bag';
+
+import styles from './src/styles/CommonStyles';
+import BrandLogo from './assets/images/BS_Trading.png';
 
 const transitionConfig = () => ({
   transitionSpec: {
@@ -33,7 +40,7 @@ const transitionConfig = () => ({
   },
 });
 
-const appStack = createMaterialBottomTabNavigator(
+const homeTabs = createMaterialBottomTabNavigator(
   {
     Cosmetics: {
       screen: Cosmetics,
@@ -75,6 +82,35 @@ const appStack = createMaterialBottomTabNavigator(
     barStyle: {
       backgroundColor: '#fff',
     },
+  },
+);
+
+const appStack = createStackNavigator(
+  {
+    homeTabs: {
+      screen: homeTabs,
+      navigationOptions: ({ navigation }) => ({
+        headerTitle: <Image style={styles.headerImage} source={BrandLogo} />,
+        headerRight: (
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Bag')}
+            style={{ marginRight: 15, position: 'relative' }}
+          >
+            <Icon name="shoppingcart" size={20} color="#616161" />
+            <View
+              style={styles.badge}
+            />
+          </TouchableOpacity>
+        ),
+      }),
+    },
+    ProductDetail,
+    Bag,
+  },
+  {
+    headerMode: 'float',
+    mode: 'modal',
+    transitionConfig,
   },
 );
 
