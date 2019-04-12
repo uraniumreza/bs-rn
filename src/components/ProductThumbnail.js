@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, Text, Image, StyleSheet, TouchableNativeFeedback,
+  View, Text, Image, StyleSheet, TouchableNativeFeedback, ToastAndroid,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { withNavigation } from 'react-navigation';
@@ -11,15 +11,28 @@ const { width } = theme;
 const ProductThumbnail = ({
   navigation,
   product: {
-    image: productImage, name: productName, price: originalPrice, discount,
+    id,
+    image: productImage,
+    name: productName,
+    price: originalPrice,
+    discount,
+    stock_count: stockCount,
   },
 }) => {
   const {
-    container, image, name, priceContainer, price, taka,
+    container,
+    image,
+    name,
+    priceContainer,
+    price,
+    taka,
+    priceStockContainer,
+    stockContainer,
   } = styles;
 
   const navigateToProductDetail = () => {
-    navigation.navigate('ProductDetail');
+    if (stockCount === 0) ToastAndroid.show('Sorry; this product is out of stock!', ToastAndroid.LONG);
+    else navigation.navigate('ProductDetail', { productId: id });
   };
 
   return (
@@ -34,9 +47,12 @@ const ProductThumbnail = ({
         <Text style={name} numberOfLines={2}>
           {productName}
         </Text>
-        <View style={priceContainer}>
-          <Text style={price}>{originalPrice - discount}</Text>
-          <Text style={taka}>{'\u09F3'}</Text>
+        <View style={priceStockContainer}>
+          <View style={priceContainer}>
+            <Text style={price}>{originalPrice - discount}</Text>
+            <Text style={taka}>{'\u09F3'}</Text>
+          </View>
+          {stockCount === 0 && <Text style={stockContainer}>STOCK OUT</Text>}
         </View>
       </View>
     </TouchableNativeFeedback>
@@ -63,6 +79,21 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 14,
     color: '#161925',
+  },
+  priceStockContainer: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  stockContainer: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: '#F00',
+    textAlign: 'center',
+    letterSpacing: 2,
+    paddingTop: 3,
   },
   priceContainer: {
     flexDirection: 'row',

@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 
 const BagIcon = ({ cartLength, navigation }) => (
   <TouchableOpacity onPress={() => navigation.navigate('Bag')} style={styles.button}>
-    <Icon name="shoppingcart" size={20} color="#616161" />
+    <Icon name="shoppingcart" size={23} color="#616161" />
     {cartLength > 0 && <View style={styles.badge} />}
   </TouchableOpacity>
 );

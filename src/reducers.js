@@ -3,7 +3,7 @@ import ACTION_TYPES from './constants/ActionTypes';
 const initialState = {
   temporaryValue: 1,
   tokens: null,
-  cart: [],
+  cart: [1],
 };
 
 const reducer = (state = initialState, action) => {
