@@ -64,7 +64,7 @@ class ProductDetail extends Component {
           {product.description}
         </Text>
         {product.color && <Text style={color}>{`Color: ${product.color}`}</Text>}
-        <AddToBag />
+        <AddToBag product={product} />
       </View>
     );
   }
