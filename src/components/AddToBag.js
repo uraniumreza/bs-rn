@@ -7,11 +7,15 @@ import {
   LayoutAnimation,
   ToastAndroid,
 } from 'react-native';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/AntDesign';
 import theme from '../styles/Theme';
+import { addToBag, updateQuantity } from '../actions';
 
 const { width, Primary } = theme;
+
+const mapDispatchToProps = { addToBag, updateQuantity };
 
 class AddToBag extends Component {
   constructor(props) {
@@ -23,14 +27,17 @@ class AddToBag extends Component {
     };
   }
 
-  showQuantity = () => {
+  showQuantity = async () => {
+    const { addToBag, product } = this.props;
+    await addToBag(product);
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
     this.setState({ isQuantityVisible: true });
   };
 
   handleQuantity = (mode) => {
     const {
-      product: { stock_count: stock },
+      product: { stock_count: stock, _id },
+      updateQuantity,
     } = this.props;
     const { quantity } = this.state;
 
@@ -38,10 +45,12 @@ class AddToBag extends Component {
       this.setState(prevState => ({
         quantity: prevState.quantity + 1,
       }));
+      updateQuantity(_id, quantity + 1);
     } else if (mode === 'minus') {
       this.setState(prevState => ({
         quantity: prevState.quantity - 1,
       }));
+      updateQuantity(_id, quantity - 1);
     } else {
       ToastAndroid.show('STOCK LIMIT OVERFLOWED', ToastAndroid.SHORT);
     }
@@ -139,8 +148,7 @@ const styles = StyleSheet.create({
   },
 });
 
-AddToBag.propTypes = {
-  product: PropTypes.shape.isRequired,
-};
-
-export default AddToBag;
+export default connect(
+  null,
+  mapDispatchToProps,
+)(AddToBag);

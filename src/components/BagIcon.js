@@ -5,13 +5,13 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({
-  cartLength: state.cart.length,
+  bagLength: state.bag.length,
 });
 
-const BagIcon = ({ cartLength, navigation }) => (
+const BagIcon = ({ bagLength, navigation }) => (
   <TouchableOpacity onPress={() => navigation.navigate('Bag')} style={styles.button}>
     <Icon name="shoppingcart" size={23} color="#616161" />
-    {cartLength > 0 && <View style={styles.badge} />}
+    {bagLength > 0 && <View style={styles.badge} />}
   </TouchableOpacity>
 );
 
@@ -32,11 +32,11 @@ const styles = StyleSheet.create({
 });
 
 BagIcon.propTypes = {
-  cartLength: PropTypes.number,
+  bagLength: PropTypes.number,
 };
 
 BagIcon.defaultProps = {
-  cartLength: 0,
+  bagLength: 0,
 };
 
 export default connect(mapStateToProps)(BagIcon);

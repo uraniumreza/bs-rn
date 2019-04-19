@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
 import styles from '../styles/CommonStyles';
+
+const mapStateToProps = state => ({
+  bag: state.bag,
+});
 
 class Bag extends Component {
   constructor(props) {
@@ -9,7 +14,9 @@ class Bag extends Component {
   }
 
   render() {
+    const { bag } = this.props;
     const { container, welcome } = styles;
+    console.log(bag);
     return (
       <View style={container}>
         <Text style={welcome}>BAG</Text>
@@ -18,4 +25,4 @@ class Bag extends Component {
   }
 }
 
-export default Bag;
+export default connect(mapStateToProps)(Bag);
