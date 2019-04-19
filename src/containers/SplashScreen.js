@@ -22,7 +22,7 @@ class SplashScreen extends Component {
   }
 
   componentDidMount() {
-    getFromAS('AUTH').then(async (data) => {
+    getFromAS('ATH').then(async (data) => {
       if (!data) {
         setTimeout(() => {
           LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);

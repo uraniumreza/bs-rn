@@ -1,25 +1,33 @@
 import React, { Component } from 'react';
 import {
-  View, Text, StyleSheet, TextInput, TouchableOpacity,
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { login } from '../utils/AuthService';
 import theme from '../styles/Theme';
 import commonStyles from '../styles/CommonStyles';
 
-const { width } = theme;
+const { Secondary, width } = theme;
+
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       contactNo: '',
       password: '',
+      isBusy: false,
     };
   }
 
   login = async () => {
     const { contactNo, password } = this.state;
     const { navigation } = this.props;
+    await this.setState({ isBusy: true });
     await login(contactNo, password);
     navigation.navigate('App');
   };
@@ -29,7 +37,8 @@ class Login extends Component {
     const {
       header, credentialInput, loginButton, loginButtonText,
     } = styles;
-    const { contactNo, password } = this.state;
+    const { contactNo, password, isBusy } = this.state;
+
     return (
       <View style={container}>
         <Text style={header}>LOGIN</Text>
@@ -53,10 +62,14 @@ class Login extends Component {
         />
 
         <TouchableOpacity style={loginButton} onPress={this.login}>
-          <Text style={loginButtonText}>
-            NEXT
-            <Icon name="caretright" size={18} />
-          </Text>
+          {isBusy ? (
+            <ActivityIndicator size="small" color={Secondary} />
+          ) : (
+            <Text style={loginButtonText}>
+              NEXT
+              <Icon name="caretright" size={18} />
+            </Text>
+          )}
         </TouchableOpacity>
       </View>
     );
