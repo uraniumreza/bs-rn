@@ -12,7 +12,7 @@ const CommonStyles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     paddingTop: 10,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFF',
     position: 'relative',
   },
   welcome: {
