@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import {
   View, Text, Image, StyleSheet, LayoutAnimation, TouchableOpacity,
 } from 'react-native';
+
 import { connect } from 'react-redux';
 import commonStyles from '../styles/CommonStyles';
 import theme from '../styles/Theme';
 import { getFromAS } from '../utils/AuthService';
 import logoImage from '../../assets/images/BS_LOGO.png';
-import { setTokens } from '../actions';
+import { setTokens, restoreBag } from '../actions';
 
 const { width, Primary, Secondary } = theme;
-const mapDispatchToProps = { setTokens };
+const mapDispatchToProps = { setTokens, restoreBag };
 
 class SplashScreen extends Component {
   constructor(props) {
@@ -36,7 +37,18 @@ class SplashScreen extends Component {
         this.navigate('App');
       }
     });
+
+    this.updateBag();
   }
+
+  updateBag = () => {
+    const { restoreBag } = this.props;
+    getFromAS('BAG').then(async (bag) => {
+      if (bag) {
+        await restoreBag(bag);
+      }
+    });
+  };
 
   navigate = (screen) => {
     const { navigation } = this.props;

@@ -5,6 +5,14 @@ export const setTokens = tokens => ({
   payload: tokens,
 });
 
+export const restoreBag = (bag) => {
+  console.log('ACTION:', bag);
+  return {
+    type: ACTION_TYPES.RESTORE_BAG,
+    payload: bag,
+  };
+};
+
 export const addToBag = product => ({
   type: ACTION_TYPES.ADD_TO_BAG,
   payload: product,

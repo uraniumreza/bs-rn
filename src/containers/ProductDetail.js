@@ -42,8 +42,6 @@ class ProductDetail extends Component {
     } = styles;
     const { isLoading, product } = this.state;
 
-    console.log(product);
-
     if (isLoading) {
       return (
         <View style={container}>
@@ -64,7 +62,7 @@ class ProductDetail extends Component {
           {product.description}
         </Text>
         {product.color && <Text style={color}>{`Color: ${product.color}`}</Text>}
-        <AddToBag product={product} />
+        {product && <AddToBag product={product} />}
       </View>
     );
   }

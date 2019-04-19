@@ -11,11 +11,15 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/AntDesign';
 import theme from '../styles/Theme';
-import { addToBag, updateQuantity } from '../actions';
+import { addToBag, removeFromBag, updateQuantity } from '../actions';
 
 const { width, Primary } = theme;
 
-const mapDispatchToProps = { addToBag, updateQuantity };
+const mapStateToProps = state => ({
+  bag: state.bag,
+});
+
+const mapDispatchToProps = { addToBag, removeFromBag, updateQuantity };
 
 class AddToBag extends Component {
   constructor(props) {
@@ -27,6 +31,14 @@ class AddToBag extends Component {
     };
   }
 
+  componentDidMount = () => {
+    const { bag, product } = this.props;
+
+    bag.forEach((item) => {
+      if (item._id === product._id) this.setState({ isQuantityVisible: true, quantity: item.quantity });
+    });
+  };
+
   showQuantity = async () => {
     const { addToBag, product } = this.props;
     await addToBag(product);
@@ -34,10 +46,11 @@ class AddToBag extends Component {
     this.setState({ isQuantityVisible: true });
   };
 
-  handleQuantity = (mode) => {
+  handleQuantity = async (mode) => {
     const {
       product: { stock_count: stock, _id },
       updateQuantity,
+      removeFromBag,
     } = this.props;
     const { quantity } = this.state;
 
@@ -46,11 +59,14 @@ class AddToBag extends Component {
         quantity: prevState.quantity + 1,
       }));
       updateQuantity(_id, quantity + 1);
-    } else if (mode === 'minus') {
+    } else if (mode === 'minus' && quantity > 0) {
       this.setState(prevState => ({
         quantity: prevState.quantity - 1,
       }));
-      updateQuantity(_id, quantity - 1);
+      if (quantity - 1 === 0) {
+        await removeFromBag(_id);
+        this.setState({ isQuantityVisible: false });
+      } else updateQuantity(_id, quantity - 1);
     } else {
       ToastAndroid.show('STOCK LIMIT OVERFLOWED', ToastAndroid.SHORT);
     }
@@ -59,42 +75,47 @@ class AddToBag extends Component {
   render() {
     const { isQuantityVisible, quantity } = this.state;
 
+    if (isQuantityVisible) {
+      return (
+        <TouchableNativeFeedback>
+          <View style={styles.container}>
+            <View style={styles.quantityContainer}>
+              <Icon
+                name="minuscircleo"
+                size={23}
+                color="#616161"
+                hitSlop={{
+                  top: 10,
+                  bottom: 10,
+                  left: 10,
+                  right: 0,
+                }}
+                onPress={() => this.handleQuantity('minus')}
+              />
+              <Text style={styles.quantity}>{quantity}</Text>
+              <Icon
+                name="pluscircleo"
+                size={23}
+                color="#616161"
+                hitSlop={{
+                  top: 10,
+                  bottom: 10,
+                  left: 0,
+                  right: 10,
+                }}
+                onPress={() => this.handleQuantity('plus')}
+              />
+            </View>
+            <Text style={styles.label}>QUANTITY</Text>
+          </View>
+        </TouchableNativeFeedback>
+      );
+    }
+
     return (
       <TouchableNativeFeedback onPress={this.showQuantity}>
         <View style={styles.container}>
-          {isQuantityVisible && (
-            <Fragment>
-              <View style={styles.quantityContainer}>
-                <Icon
-                  name="minuscircleo"
-                  size={23}
-                  color="#616161"
-                  hitSlop={{
-                    top: 10,
-                    bottom: 10,
-                    left: 10,
-                    right: 0,
-                  }}
-                  onPress={() => this.handleQuantity('minus')}
-                />
-                <Text style={styles.quantity}>{quantity}</Text>
-                <Icon
-                  name="pluscircleo"
-                  size={23}
-                  color="#616161"
-                  hitSlop={{
-                    top: 10,
-                    bottom: 10,
-                    left: 0,
-                    right: 10,
-                  }}
-                  onPress={() => this.handleQuantity('plus')}
-                />
-              </View>
-              <Text style={styles.label}>QUANTITY</Text>
-            </Fragment>
-          )}
-          {!isQuantityVisible && <Text style={styles.button}>ADD TO BAG</Text>}
+          <Text style={styles.button}>ADD TO BAG</Text>
         </View>
       </TouchableNativeFeedback>
     );
@@ -148,7 +169,14 @@ const styles = StyleSheet.create({
   },
 });
 
+AddToBag.propTypes = {
+  product: PropTypes.shape({
+    _id: PropTypes.string,
+    stock_count: PropTypes.number,
+  }).isRequired,
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(AddToBag);

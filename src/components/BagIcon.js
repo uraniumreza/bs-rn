@@ -10,7 +10,16 @@ const mapStateToProps = state => ({
 
 const BagIcon = ({ bagLength, navigation }) => (
   <TouchableOpacity onPress={() => navigation.navigate('Bag')} style={styles.button}>
-    <Icon name="shoppingcart" size={23} color="#616161" />
+    <View
+      hitSlop={{
+        top: 25,
+        bottom: 25,
+        left: 25,
+        right: 25,
+      }}
+    >
+      <Icon name="shoppingcart" size={23} color="#616161" />
+    </View>
     {bagLength > 0 && <View style={styles.badge} />}
   </TouchableOpacity>
 );

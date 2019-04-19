@@ -1,9 +1,10 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import ACTION_TYPES from './constants/ActionTypes';
 
 const initialState = {
   temporaryValue: 1,
   tokens: null,
-  bag: [1],
+  bag: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,33 +19,48 @@ const reducer = (state = initialState, action) => {
       };
     }
 
-    case ACTION_TYPES.ADD_TO_BAG: {
+    case ACTION_TYPES.RESTORE_BAG: {
+      console.log('INITIAL BAG', payload);
       return {
         ...state,
-        bag: [...bag, { ...payload, quantity: 1 }],
+        bag: payload,
+      };
+    }
+
+    case ACTION_TYPES.ADD_TO_BAG: {
+      const newBag = [...bag, { ...payload, quantity: 1 }];
+
+      AsyncStorage.setItem('BAG', JSON.stringify(newBag));
+      return {
+        ...state,
+        bag: newBag,
       };
     }
 
     case ACTION_TYPES.REMOVE_FROM_BAG: {
+      const newBag = bag.filter(b => b._id !== payload);
+
+      AsyncStorage.setItem('BAG', JSON.stringify(newBag));
       return {
         ...state,
-        bag: bag.filter(b => b._id !== payload),
+        bag: newBag,
       };
     }
 
     case ACTION_TYPES.UPDATE_QUANTITY: {
+      const newBag = bag.map((b) => {
+        if (b._id === payload.id) b.quantity = payload.quantity;
+        return b;
+      });
+
+      AsyncStorage.setItem('BAG', JSON.stringify(newBag));
       return {
         ...state,
-        bag: bag.map((b) => {
-          if (b._id === payload.id) {
-            b.quantity = payload.quantity;
-          }
-          return b;
-        }),
+        bag: newBag,
       };
     }
   }
-  console.log(state);
+
   return state;
 };
 
