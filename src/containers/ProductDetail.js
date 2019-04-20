@@ -6,10 +6,15 @@ import commonStyles from '../styles/CommonStyles';
 import api from '../utils/API';
 import theme from '../styles/Theme';
 import AddToBag from '../components/AddToBag';
+import BagIcon from '../components/BagIcon';
 
 const { Secondary, width } = theme;
 
 class ProductDetail extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    headerRight: <BagIcon navigation={navigation} />,
+  });
+
   constructor(props) {
     super(props);
     this.state = {
