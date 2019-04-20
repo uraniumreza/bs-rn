@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import styles from '../styles/CommonStyles';
+import BagItem from '../components/BagItem';
 
 const mapStateToProps = state => ({
   bag: state.bag,
@@ -16,11 +17,15 @@ class Bag extends Component {
   render() {
     const { bag } = this.props;
     const { container, welcome } = styles;
-    console.log(bag);
+
     return (
-      <View style={container}>
-        <Text style={welcome}>BAG</Text>
-      </View>
+      <FlatList
+        contentContainerStyle={{ paddingVertical: 15 }}
+        data={bag}
+        renderItem={({ item }) => <BagItem product={item} />}
+        keyExtractor={item => item._id}
+        numColumns={1}
+      />
     );
   }
 }

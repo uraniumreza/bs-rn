@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/AntDesign';
 import theme from '../styles/Theme';
 import { addToBag, removeFromBag, updateQuantity } from '../actions';
+import QuantityController from './QuantityController';
 
 const { width, Primary } = theme;
 
@@ -27,15 +28,20 @@ class AddToBag extends Component {
 
     this.state = {
       isQuantityVisible: false,
-      quantity: 1,
+      quantity: 0,
     };
   }
 
-  componentDidMount = () => {
+  componentWillMount = async () => {
     const { bag, product } = this.props;
 
-    bag.forEach((item) => {
-      if (item._id === product._id) this.setState({ isQuantityVisible: true, quantity: item.quantity });
+    await bag.forEach((item) => {
+      if (item._id === product._id) {
+        this.setState({
+          isQuantityVisible: true,
+          quantity: item.quantity,
+        });
+      }
     });
   };
 
@@ -46,66 +52,27 @@ class AddToBag extends Component {
     this.setState({ isQuantityVisible: true });
   };
 
-  handleQuantity = async (mode) => {
-    const {
-      product: { stock_count: stock, _id },
-      updateQuantity,
-      removeFromBag,
-    } = this.props;
-    const { quantity } = this.state;
-
-    if (mode === 'plus' && stock > quantity) {
-      this.setState(prevState => ({
-        quantity: prevState.quantity + 1,
-      }));
-      updateQuantity(_id, quantity + 1);
-    } else if (mode === 'minus' && quantity > 0) {
-      this.setState(prevState => ({
-        quantity: prevState.quantity - 1,
-      }));
-      if (quantity - 1 === 0) {
-        await removeFromBag(_id);
-        this.setState({ isQuantityVisible: false });
-      } else updateQuantity(_id, quantity - 1);
-    } else {
-      ToastAndroid.show('STOCK LIMIT OVERFLOWED', ToastAndroid.SHORT);
-    }
+  hideQuantity = async () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+    this.setState({ isQuantityVisible: false });
   };
 
   render() {
     const { isQuantityVisible, quantity } = this.state;
+    const {
+      product: { stock_count: stockCount, _id },
+    } = this.props;
 
     if (isQuantityVisible) {
       return (
         <TouchableNativeFeedback>
           <View style={styles.container}>
-            <View style={styles.quantityContainer}>
-              <Icon
-                name="minuscircleo"
-                size={23}
-                color="#616161"
-                hitSlop={{
-                  top: 10,
-                  bottom: 10,
-                  left: 10,
-                  right: 0,
-                }}
-                onPress={() => this.handleQuantity('minus')}
-              />
-              <Text style={styles.quantity}>{quantity}</Text>
-              <Icon
-                name="pluscircleo"
-                size={23}
-                color="#616161"
-                hitSlop={{
-                  top: 10,
-                  bottom: 10,
-                  left: 0,
-                  right: 10,
-                }}
-                onPress={() => this.handleQuantity('plus')}
-              />
-            </View>
+            <QuantityController
+              stock={stockCount}
+              id={_id}
+              quantity={quantity}
+              hideQuantity={this.hideQuantity}
+            />
             <Text style={styles.label}>QUANTITY</Text>
           </View>
         </TouchableNativeFeedback>
