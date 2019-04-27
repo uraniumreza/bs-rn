@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  View, Text, ActivityIndicator, Image, StyleSheet,
+  View, Text, ActivityIndicator, Image, StyleSheet, ScrollView,
 } from 'react-native';
 import commonStyles from '../styles/CommonStyles';
 import api from '../utils/API';
@@ -57,16 +57,18 @@ class ProductDetail extends Component {
 
     return (
       <View style={scrollableContainer}>
-        <Image source={{ uri: product.image }} style={image} />
-        <Text style={name}>{product.name}</Text>
-        <View style={priceContainer}>
-          <Text style={price}>{product.price - product.discount}</Text>
-          <Text style={taka}>{'\u09F3'}</Text>
-        </View>
-        <Text style={description} numberOfLines={5}>
-          {product.description}
-        </Text>
-        {product.color && <Text style={color}>{`Color: ${product.color}`}</Text>}
+        <ScrollView style={{ marginBottom: 58 }}>
+          <Image source={{ uri: product.image }} style={image} />
+          <Text style={name}>{product.name}</Text>
+          <View style={priceContainer}>
+            <Text style={price}>{product.price - product.discount}</Text>
+            <Text style={taka}>{'\u09F3'}</Text>
+          </View>
+          <Text style={description} numberOfLines={5}>
+            {product.description}
+          </Text>
+          {product.color && <Text style={color}>{`Color: ${product.color}`}</Text>}
+        </ScrollView>
         {product && <AddToBag product={product} />}
       </View>
     );
