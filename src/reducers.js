@@ -4,6 +4,7 @@ import ACTION_TYPES from './constants/ActionTypes';
 const initialState = {
   temporaryValue: 1,
   tokens: null,
+  user: null,
   bag: [],
 };
 
@@ -19,8 +20,14 @@ const reducer = (state = initialState, action) => {
       };
     }
 
+    case ACTION_TYPES.RESTORE_USER: {
+      return {
+        ...state,
+        user: payload,
+      };
+    }
+
     case ACTION_TYPES.RESTORE_BAG: {
-      console.log('INITIAL BAG', payload);
       return {
         ...state,
         bag: payload,

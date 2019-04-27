@@ -9,10 +9,12 @@ import commonStyles from '../styles/CommonStyles';
 import theme from '../styles/Theme';
 import { getFromAS } from '../utils/AuthService';
 import logoImage from '../../assets/images/BS_LOGO.png';
-import { setTokens, restoreBag } from '../actions';
+import { setTokens, restoreBag, restoreUser } from '../actions';
 
 const { width, Primary, Secondary } = theme;
-const mapDispatchToProps = { setTokens, restoreBag };
+const mapDispatchToProps = { setTokens, restoreBag, restoreUser };
+
+// TODO: AsyncStorage MultiSet and MultiGet
 
 class SplashScreen extends Component {
   constructor(props) {
@@ -38,14 +40,19 @@ class SplashScreen extends Component {
       }
     });
 
-    this.updateBag();
+    this.loadFromAS();
   }
 
-  updateBag = () => {
-    const { restoreBag } = this.props;
+  loadFromAS = () => {
+    const { restoreBag, restoreUser } = this.props;
     getFromAS('BAG').then(async (bag) => {
       if (bag) {
         await restoreBag(bag);
+      }
+    });
+    getFromAS('USER').then(async (user) => {
+      if (user) {
+        await restoreUser(user);
       }
     });
   };

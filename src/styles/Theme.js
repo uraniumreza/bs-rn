@@ -7,4 +7,10 @@ export default {
   Green: '#2ecc71',
   width: Dimensions.get('window').width,
   height: Dimensions.get('window').height,
+  COLORS: {
+    Pending: '#36D88F',
+    Processing: 'cyan',
+    Delivered: 'green',
+    Canceled: 'red',
+  },
 };

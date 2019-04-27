@@ -1,7 +1,7 @@
 import { ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import store from '../store';
-import { setTokens } from '../actions';
+import { setTokens, restoreUser } from '../actions';
 import api from './API';
 
 async function getFromAS(key) {
@@ -36,6 +36,7 @@ const login = (phone, password) => {
     setToAS('USER', user);
     setToAS('AUTH', data);
     store.dispatch(setTokens(token));
+    store.dispatch(restoreUser(user));
   });
 };
 

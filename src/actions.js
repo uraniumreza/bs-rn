@@ -10,6 +10,11 @@ export const restoreBag = bag => ({
   payload: bag,
 });
 
+export const restoreUser = user => ({
+  type: ACTION_TYPES.RESTORE_USER,
+  payload: user,
+});
+
 export const addToBag = product => ({
   type: ACTION_TYPES.ADD_TO_BAG,
   payload: product,

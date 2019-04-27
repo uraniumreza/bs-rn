@@ -9,6 +9,7 @@ import Login from './src/containers/Login';
 import Profile from './src/containers/Profile';
 import SplashScreen from './src/containers/SplashScreen';
 import ProductDetail from './src/containers/ProductDetail';
+import OrderDetail from './src/containers/OrderDetail';
 import Bag from './src/containers/Bag';
 import BagIcon from './src/components/BagIcon';
 import styles from './src/styles/CommonStyles';
@@ -91,6 +92,7 @@ const appStack = createStackNavigator(
       }),
     },
     ProductDetail,
+    OrderDetail,
     Bag,
   },
   {
