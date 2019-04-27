@@ -47,6 +47,14 @@ const reducer = (state = initialState, action) => {
       };
     }
 
+    case ACTION_TYPES.CLEAR_BAG: {
+      AsyncStorage.removeItem('BAG');
+      return {
+        ...state,
+        bag: [],
+      };
+    }
+
     case ACTION_TYPES.UPDATE_QUANTITY: {
       const newBag = bag.map((b) => {
         if (b._id === payload.id) b.quantity = payload.quantity;

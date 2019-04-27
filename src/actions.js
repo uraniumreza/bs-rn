@@ -20,6 +20,11 @@ export const removeFromBag = id => ({
   payload: id,
 });
 
+export const clearBag = id => ({
+  type: ACTION_TYPES.CLEAR_BAG,
+  payload: id,
+});
+
 export const updateQuantity = (id, quantity) => ({
   type: ACTION_TYPES.UPDATE_QUANTITY,
   payload: { id, quantity },
