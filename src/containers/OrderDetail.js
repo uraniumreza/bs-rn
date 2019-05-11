@@ -7,6 +7,7 @@ import {
   FlatList,
   TouchableNativeFeedback,
 } from 'react-native';
+import { connect } from 'react-redux';
 import commonStyles from '../styles/CommonStyles';
 import theme from '../styles/Theme';
 import OrderItem from '../components/OrderItem';
@@ -15,6 +16,8 @@ import api from '../utils/API';
 const {
   Secondary, width, COLORS, Green,
 } = theme;
+
+const mapStateToProps = state => ({ user: state.user });
 
 class OrderDetail extends Component {
   static navigationOptions = () => ({
@@ -39,7 +42,7 @@ class OrderDetail extends Component {
 
   render() {
     const { isBusy } = this.state;
-    const { navigation } = this.props;
+    const { navigation, user } = this.props;
     const order = navigation.getParam('order', null);
 
     if (isBusy) {
@@ -70,10 +73,10 @@ class OrderDetail extends Component {
           keyExtractor={item => item.product_id}
           numColumns={1}
         />
-        {order.state === 'Pending' && (
+        {order.state === 'Pending' && user.role !== 'sales' && (
           <TouchableNativeFeedback onPress={this.confirmDelivery}>
             <View style={styles.buttonContainer}>
-              <Text style={styles.button}>ORDER RECIEVED</Text>
+              <Text style={styles.button}>ORDER RECEIVED</Text>
             </View>
           </TouchableNativeFeedback>
         )}
@@ -152,4 +155,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OrderDetail;
+export default connect(mapStateToProps)(OrderDetail);
