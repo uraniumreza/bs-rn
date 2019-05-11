@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
   View, Text, StyleSheet, FlatList, ActivityIndicator,
 } from 'react-native';
@@ -28,11 +28,20 @@ class Orders extends Component {
   }
 
   componentDidMount() {
+    this.getOrders();
+  }
+
+  onRefresh = async () => {
+    await this.setState(() => ({ isLoading: true }));
+    this.getOrders();
+  };
+
+  getOrders = () => {
     api.get('/order').then((data) => {
       console.log(data);
       this.setState({ orders: data, isLoading: false });
     });
-  }
+  };
 
   render() {
     const {
@@ -40,13 +49,6 @@ class Orders extends Component {
     } = this.props;
     const { orders, isLoading } = this.state;
 
-    if (isLoading) {
-      return (
-        <View style={commonStyles.container}>
-          <ActivityIndicator size="large" color={Secondary} />
-        </View>
-      );
-    }
     return (
       <View style={styles.container}>
         <View style={styles.profileContainer}>
@@ -55,14 +57,24 @@ class Orders extends Component {
           <Text style={styles.address}>{address}</Text>
         </View>
         <View style={styles.hr} />
-        <Text style={commonStyles.welcome}>YOUR ORDERS</Text>
-        <FlatList
-          contentContainerStyle={{ paddingVertical: 15 }}
-          data={orders}
-          renderItem={({ item }) => <OrderThumbnail order={item} />}
-          keyExtractor={order => order.order_id}
-          numColumns={2}
-        />
+        {isLoading ? (
+          <View style={commonStyles.container}>
+            <ActivityIndicator size="large" color={Secondary} />
+          </View>
+        ) : (
+          <Fragment>
+            <Text style={commonStyles.welcome}>YOUR ORDERS</Text>
+            <FlatList
+              contentContainerStyle={{ paddingVertical: 15 }}
+              data={orders}
+              onRefresh={() => this.onRefresh()}
+              refreshing={isLoading}
+              renderItem={({ item }) => <OrderThumbnail order={item} />}
+              keyExtractor={order => order.order_id}
+              numColumns={2}
+            />
+          </Fragment>
+        )}
       </View>
     );
   }
