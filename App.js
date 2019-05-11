@@ -11,6 +11,7 @@ import SplashScreen from './src/containers/SplashScreen';
 import ProductDetail from './src/containers/ProductDetail';
 import OrderDetail from './src/containers/OrderDetail';
 import Bag from './src/containers/Bag';
+import Orders from './src/containers/Orders';
 import BagIcon from './src/components/BagIcon';
 import styles from './src/styles/CommonStyles';
 import BrandLogo from './assets/images/BS_Trading.png';
@@ -102,6 +103,18 @@ const appStack = createStackNavigator(
   },
 );
 
+const srStack = createStackNavigator(
+  {
+    Orders,
+    OrderDetail,
+  },
+  {
+    headerMode: 'float',
+    mode: 'modal',
+    transitionConfig,
+  },
+);
+
 const authStack = createSwitchNavigator(
   {
     Splash: {
@@ -117,6 +130,7 @@ const authStack = createSwitchNavigator(
       },
     },
     App: appStack,
+    SR: srStack,
   },
   {
     headerMode: 'none',

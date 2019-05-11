@@ -36,11 +36,10 @@ class SplashScreen extends Component {
           const { setTokens } = this.props;
           setTokens(value);
         });
-        this.navigate('App');
+
+        this.loadFromAS();
       }
     });
-
-    this.loadFromAS();
   }
 
   loadFromAS = () => {
@@ -53,6 +52,8 @@ class SplashScreen extends Component {
     getFromAS('USER').then(async (user) => {
       if (user) {
         await restoreUser(user);
+        if (user.role === 'sales') this.navigate('SR');
+        else this.navigate('App');
       }
     });
   };

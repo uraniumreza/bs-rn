@@ -37,6 +37,8 @@ const login = (phone, password) => {
     setToAS('AUTH', data);
     store.dispatch(setTokens(token));
     store.dispatch(restoreUser(user));
+
+    return user;
   });
 };
 

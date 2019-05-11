@@ -28,8 +28,9 @@ class Login extends Component {
     const { contactNo, password } = this.state;
     const { navigation } = this.props;
     await this.setState({ isBusy: true });
-    await login(contactNo, password);
-    navigation.navigate('App');
+    const user = await login(contactNo, password);
+    if (user.role === 'sales') navigation.navigate('SR');
+    else navigation.navigate('App');
   };
 
   render() {
