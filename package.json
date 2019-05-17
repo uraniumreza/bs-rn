@@ -1,9 +1,11 @@
 {
-  "name": "bsRN",
+  "name": "BarberSaloon",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "release": "cd android && ./gradlew clean && ./gradlew assembleRelease && cd ..",
+    "serve": "cd android/app/build/outputs/apk/release && npx http-server",
     "test": "jest",
     "lint": "eslint ."
   },
