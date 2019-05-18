@@ -4,8 +4,8 @@ import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { connect } from 'react-redux';
 
-const BagIcon = ({ bagLength, navigation }) => (
-  <TouchableOpacity onPress={() => navigation.navigate('Bag')} style={styles.button}>
+const NotificationIcon = ({ bagLength, navigation }) => (
+  <TouchableOpacity onPress={() => navigation.navigate('Notifications')} style={styles.button}>
     <View
       hitSlop={{
         top: 30,
@@ -14,7 +14,7 @@ const BagIcon = ({ bagLength, navigation }) => (
         right: 30,
       }}
     >
-      <Icon name="shoppingcart" size={24} color="#616161" />
+      <Icon name="notification" size={24} color="#616161" />
     </View>
     {bagLength > 0 && <View style={styles.badge} />}
   </TouchableOpacity>
@@ -31,16 +31,16 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#52C41A',
     position: 'absolute',
-    top: 0,
-    right: -2,
+    top: 8,
+    left: -5,
   },
 });
 
-BagIcon.propTypes = {
+NotificationIcon.propTypes = {
   bagLength: PropTypes.number,
 };
 
-BagIcon.defaultProps = {
+NotificationIcon.defaultProps = {
   bagLength: 0,
 };
 
@@ -48,4 +48,4 @@ const mapStateToProps = state => ({
   bagLength: state.bag.length,
 });
 
-export default connect(mapStateToProps)(BagIcon);
+export default connect(mapStateToProps)(NotificationIcon);

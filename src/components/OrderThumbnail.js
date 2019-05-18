@@ -17,7 +17,7 @@ const OrderThumbnail = ({ navigation, order: { order_id: orderId, state }, order
     <TouchableNativeFeedback onPress={navigateToOrderDetail}>
       <View style={styles.container}>
         <Text style={styles.name} numberOfLines={2}>
-          অর্ডার নাম্বার
+          অর্ডার নং
           {'\n'}
           {orderId}
         </Text>

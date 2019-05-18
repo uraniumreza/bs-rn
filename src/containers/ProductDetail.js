@@ -6,13 +6,14 @@ import commonStyles from '../styles/CommonStyles';
 import api from '../utils/API';
 import theme from '../styles/Theme';
 import AddToBag from '../components/AddToBag';
-import BagIcon from '../components/BagIcon';
+import Fab from '../components/Fab';
+import NotificationIcon from '../components/NotificationIcon';
 
 const { Secondary, width } = theme;
 
 class ProductDetail extends Component {
   static navigationOptions = ({ navigation }) => ({
-    headerRight: <BagIcon navigation={navigation} />,
+    headerRight: <NotificationIcon navigation={navigation} />,
   });
 
   constructor(props) {
@@ -69,6 +70,7 @@ class ProductDetail extends Component {
           </Text>
           {product.color && <Text style={color}>{`Color: ${product.color}`}</Text>}
         </ScrollView>
+        <Fab style={{ bottom: 70, right: 0 }} />
         {product && <AddToBag product={product} />}
       </View>
     );

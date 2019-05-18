@@ -13,7 +13,8 @@ import ProductDetail from './src/containers/ProductDetail';
 import OrderDetail from './src/containers/OrderDetail';
 import Bag from './src/containers/Bag';
 import Orders from './src/containers/Orders';
-import BagIcon from './src/components/BagIcon';
+import NotificationIcon from './src/components/NotificationIcon';
+import Notifications from './src/containers/Notifications';
 import styles from './src/styles/CommonStyles';
 import BrandLogo from './assets/images/BS_Trading.png';
 
@@ -91,9 +92,10 @@ const appStack = createStackNavigator(
       screen: homeTabs,
       navigationOptions: ({ navigation }) => ({
         headerTitle: <Image style={styles.headerImage} source={BrandLogo} />,
-        headerRight: <BagIcon navigation={navigation} />,
+        headerRight: <NotificationIcon navigation={navigation} />,
       }),
     },
+    Notifications,
     ProductDetail,
     OrderDetail,
     Bag,
