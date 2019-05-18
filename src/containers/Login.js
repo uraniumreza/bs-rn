@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   TextInput,
+  StyleSheet,
+  ToastAndroid,
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
@@ -29,8 +30,13 @@ class Login extends Component {
     const { navigation } = this.props;
     await this.setState({ isBusy: true });
     const user = await login(contactNo, password);
-    if (user.role === 'sales') navigation.navigate('SR');
-    else navigation.navigate('App');
+
+    if (user?.role === 'sales') navigation.navigate('SR');
+    else if (user?.role === 'user') navigation.navigate('App');
+    else {
+      this.setState(() => ({ isBusy: false }));
+      ToastAndroid.show('আপনার ফোন নাম্বার, পাসওয়ার্ড পুনরায় চেক করুন', ToastAndroid.LONG);
+    }
   };
 
   render() {
@@ -42,13 +48,14 @@ class Login extends Component {
 
     return (
       <View style={container}>
-        <Text style={header}>LOGIN</Text>
+        <Text style={header}>লগ ইন</Text>
         <TextInput
           style={credentialInput}
           onChangeText={text => this.setState({ contactNo: text })}
           value={contactNo}
-          placeholder="Phone Number"
+          placeholder="ফোন নাম্বার"
           keyboardType="phone-pad"
+          maxLength={11}
           textContentType="telephoneNumber"
           autoFocus
         />
@@ -56,7 +63,7 @@ class Login extends Component {
           style={credentialInput}
           onChangeText={text => this.setState({ password: text })}
           value={password}
-          placeholder="Password"
+          placeholder="পাসওয়ার্ড"
           keyboardType="decimal-pad"
           textContentType="password"
           secureTextEntry
@@ -67,7 +74,7 @@ class Login extends Component {
             <ActivityIndicator size="small" color={Secondary} />
           ) : (
             <Text style={loginButtonText}>
-              NEXT
+              পরবর্তী ধাপে যান
               <Icon name="caretright" size={18} />
             </Text>
           )}
