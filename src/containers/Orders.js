@@ -16,7 +16,7 @@ const mapStateToProps = state => ({
 
 class Orders extends Component {
   static navigationOptions = {
-    title: 'Your Orders',
+    title: 'অর্ডার লিস্ট',
   };
 
   constructor(props) {
@@ -65,7 +65,7 @@ class Orders extends Component {
 
         {orders.length > 0 && (
           <View>
-            <Text style={commonStyles.welcome}>YOUR ORDERS</Text>
+            <Text style={commonStyles.welcome}>আপনার অর্ডারগুলো</Text>
             <FlatList
               contentContainerStyle={{ paddingVertical: 15 }}
               data={orders}
