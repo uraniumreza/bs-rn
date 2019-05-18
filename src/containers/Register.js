@@ -192,8 +192,10 @@ class Login extends Component {
             style={[credentialInput, { marginBottom: 25 }]}
             onChangeText={text => this.setState({ signedupBy: text })}
             value={signedupBy}
-            placeholder="SR এর আইডি (অপশনাল) "
-            keyboardType="decimal-pad"
+            placeholder="SR এর ফোন নাম্বার (অপশনাল) "
+            maxLength={11}
+            keyboardType="phone-pad"
+            textContentType="telephoneNumber"
           />
         </ScrollView>
         <TouchableOpacity style={styles.buttonContainer} onPress={this.register}>

@@ -1,10 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { connect } from 'react-redux';
 
-const NotificationIcon = ({ bagLength, navigation }) => (
+const NotificationIcon = ({ navigation }) => (
   <TouchableOpacity onPress={() => navigation.navigate('Notifications')} style={styles.button}>
     <View
       hitSlop={{
@@ -16,7 +14,7 @@ const NotificationIcon = ({ bagLength, navigation }) => (
     >
       <Icon name="notification" size={24} color="#616161" />
     </View>
-    {bagLength > 0 && <View style={styles.badge} />}
+    <View style={styles.badge} />
   </TouchableOpacity>
 );
 
@@ -36,16 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-NotificationIcon.propTypes = {
-  bagLength: PropTypes.number,
-};
-
-NotificationIcon.defaultProps = {
-  bagLength: 0,
-};
-
-const mapStateToProps = state => ({
-  bagLength: state.bag.length,
-});
-
-export default connect(mapStateToProps)(NotificationIcon);
+export default NotificationIcon;
