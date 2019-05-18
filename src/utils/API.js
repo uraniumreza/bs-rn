@@ -1,7 +1,7 @@
 import axios from 'axios';
 import store from '../store';
 
-const select = state => state.tokens.accessToken;
+const select = state => state.tokens?.accessToken;
 
 const listener = () => {
   const jwt = select(store.getState());
