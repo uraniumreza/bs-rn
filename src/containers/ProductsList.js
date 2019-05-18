@@ -18,10 +18,18 @@ class ProductList extends Component {
   }
 
   componentDidMount() {
-    const { category } = this.props;
-    const url = `/products/?category=${category}`;
-    api.get(url).then(data => this.setState({ products: data, isLoading: false }));
+    this.getProducts();
   }
+
+  getProducts = async () => {
+    const { category } = this.props;
+    await this.setState({ isLoading: true });
+    const url = `/products/?category=${category}`;
+    api.get(url).then((data) => {
+      console.log(data);
+      this.setState({ products: data, isLoading: false });
+    });
+  };
 
   render() {
     const { container } = styles;
@@ -42,6 +50,8 @@ class ProductList extends Component {
         renderItem={({ item }) => <ProductThumbnail product={item} />}
         keyExtractor={item => item.id}
         numColumns={2}
+        onRefresh={this.getProducts}
+        refreshing={isLoading}
       />
     );
   }
