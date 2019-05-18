@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  View, Text, StyleSheet, FlatList, ActivityIndicator,
+  View, Text, StyleSheet, FlatList, ActivityIndicator, ScrollView,
 } from 'react-native';
 import { connect } from 'react-redux';
 import theme from '../styles/Theme';
@@ -48,7 +48,7 @@ class Profile extends Component {
       );
     }
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.profileContainer}>
           <Text style={styles.shop}>{shopName}</Text>
           <Text style={styles.owner}>{ownerName}</Text>
@@ -68,9 +68,21 @@ class Profile extends Component {
               onRefresh={this.getOrders}
               refreshing={isLoading}
             />
+            <View style={styles.hr} />
           </View>
         )}
-      </View>
+
+        <View style={{ paddingBottom: 20 }}>
+          <Text style={commonStyles.welcome}>যোগাযোগ</Text>
+          <Text style={styles.bsName}>R K SHARKAR BAPPY</Text>
+          <Text style={styles.bsTitle}>General Manager</Text>
+          <Text style={styles.bsTitle}>01772784263</Text>
+          <Text style={styles.bsTitle}>bstradingbd@yahoo.com</Text>
+          <Text style={styles.bsTitle}>facebook.com/BSTradingBD</Text>
+          <Text style={styles.bsTitle}>Hazi Muslim Market, 23, Ali Hossain Road</Text>
+          <Text style={styles.bsTitle}>Shop 4, Moulovi Bazar, Dhaka-1100</Text>
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -110,6 +122,20 @@ const styles = StyleSheet.create({
     width: width - 30,
     marginLeft: 15,
     marginVertical: 10,
+  },
+  bsName: {
+    fontSize: 17,
+    fontWeight: '600',
+    textAlign: 'left',
+    marginHorizontal: 15,
+    letterSpacing: 3,
+    color: '#4C516D',
+  },
+  bsTitle: {
+    fontSize: 15,
+    textAlign: 'left',
+    marginHorizontal: 15,
+    color: '#4C516D',
   },
 });
 
