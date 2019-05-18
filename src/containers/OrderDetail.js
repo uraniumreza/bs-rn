@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   StyleSheet,
   FlatList,
+  ScrollView,
   TouchableNativeFeedback,
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -54,7 +55,22 @@ class OrderDetail extends Component {
     }
 
     return (
-      <View style={styles.scrollableContainer}>
+      <ScrollView
+        contentContainerStyle={{
+          alignItems: 'flex-start',
+        }}
+        style={styles.scrollableContainer}
+      >
+        {user.role === 'sales' && (
+          <View style={{ width: theme.width }}>
+            <Text style={commonStyles.welcome}>কাস্টমারের ঠিকানা</Text>
+            <Text style={styles.bsName}>{order.user.shopName}</Text>
+            <Text style={styles.bsTitle}>{order.user.ownerName}</Text>
+            <Text style={styles.bsTitle}>{order.user.phone}</Text>
+            <Text style={styles.bsTitle}>{order.user.address}</Text>
+            <View style={styles.hr} />
+          </View>
+        )}
         <View style={styles.header}>
           <Text style={commonStyles.welcome}>{`ID - ${order.order_id}`}</Text>
           <View style={styles.row}>
@@ -80,7 +96,7 @@ class OrderDetail extends Component {
             </View>
           </TouchableNativeFeedback>
         )}
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -88,11 +104,10 @@ class OrderDetail extends Component {
 const styles = StyleSheet.create({
   scrollableContainer: {
     flex: 1,
-    alignItems: 'flex-start',
     paddingTop: 10,
     backgroundColor: '#FFF',
     position: 'relative',
-    marginHorizontal: width * 0.04,
+    paddingHorizontal: width * 0.04,
   },
   header: {
     width: '100%',
@@ -152,6 +167,27 @@ const styles = StyleSheet.create({
     margin: 10,
     color: '#FFF',
     letterSpacing: 3,
+  },
+  bsName: {
+    fontSize: 17,
+    fontWeight: '600',
+    textAlign: 'left',
+    marginHorizontal: 15,
+    letterSpacing: 3,
+    color: '#4C516D',
+  },
+  bsTitle: {
+    fontSize: 15,
+    textAlign: 'left',
+    marginHorizontal: 15,
+    color: '#4C516D',
+  },
+  hr: {
+    borderBottomColor: '#CCC',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    width: width - 30,
+    marginLeft: 15,
+    marginVertical: 15,
   },
 });
 
