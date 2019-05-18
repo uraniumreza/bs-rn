@@ -4,10 +4,6 @@ import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { connect } from 'react-redux';
 
-const mapStateToProps = state => ({
-  bagLength: state.bag.length,
-});
-
 const BagIcon = ({ bagLength, navigation }) => (
   <TouchableOpacity onPress={() => navigation.navigate('Bag')} style={styles.button}>
     <View
@@ -47,5 +43,9 @@ BagIcon.propTypes = {
 BagIcon.defaultProps = {
   bagLength: 0,
 };
+
+const mapStateToProps = state => ({
+  bagLength: state.bag.length,
+});
 
 export default connect(mapStateToProps)(BagIcon);
