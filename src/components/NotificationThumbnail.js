@@ -8,17 +8,8 @@ import theme from '../styles/Theme';
 
 const { width } = theme;
 
-const NotificationThumbnail = ({ navigation, notification: { id, message } }) => {
-  const {
-    container,
-    image,
-    name,
-    priceContainer,
-    price,
-    taka,
-    priceStockContainer,
-    stockContainer,
-  } = styles;
+const NotificationThumbnail = ({ navigation, notification: { id, message, createdAt } }) => {
+  const { container, messageText, date } = styles;
 
   const navigateToProductDetail = () => {
     if (stockCount === 0) ToastAndroid.show('Sorry; this product is out of stock!', ToastAndroid.LONG);
@@ -34,7 +25,7 @@ const NotificationThumbnail = ({ navigation, notification: { id, message } }) =>
           }}
           style={image}
         /> */}
-        <Text style={name} numberOfLines={2}>
+        <Text style={messageText} numberOfLines={2}>
           {message}
         </Text>
         {/* <View style={priceStockContainer}>
@@ -44,6 +35,7 @@ const NotificationThumbnail = ({ navigation, notification: { id, message } }) =>
           </View>
           {stockCount === 0 && <Text style={stockContainer}>STOCK OUT</Text>}
         </View> */}
+        <Text style={date}>{new Date(createdAt).toDateString()}</Text>
       </View>
     </TouchableNativeFeedback>
   );
@@ -51,52 +43,28 @@ const NotificationThumbnail = ({ navigation, notification: { id, message } }) =>
 
 const styles = StyleSheet.create({
   container: {
-    width: width * 0.45,
+    width: width * 0.94,
     padding: 10,
+    paddingBottom: 20,
     marginBottom: width * 0.035,
-    marginLeft: width * 0.033,
+    marginLeft: width * 0.03,
     backgroundColor: '#ffffff',
     borderWidth: 0.5,
-    borderColor: '#d5d6d9',
+    borderRadius: 4,
+    borderColor: '#c7ea46',
+    elevation: 3,
+    position: 'relative',
   },
-  image: {
-    width: width * 0.4,
-    height: width * 0.4,
-    resizeMode: 'contain',
-  },
-  name: {
-    fontWeight: 'bold',
-    marginTop: 10,
+  messageText: {
     fontSize: 14,
     color: '#161925',
   },
-  priceStockContainer: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  stockContainer: {
-    fontSize: 11,
-    fontWeight: '600',
-    color: '#F00',
-    textAlign: 'center',
-    letterSpacing: 2,
-    paddingTop: 3,
-  },
-  priceContainer: {
-    flexDirection: 'row',
-  },
-  price: {
-    marginTop: 5,
-    fontSize: 14,
-    color: '#444',
-  },
-  taka: {
-    fontSize: 11,
-    lineHeight: 20,
-    color: '#333',
+  date: {
+    fontSize: 10,
+    position: 'absolute',
+    color: '#8d021f',
+    right: 10,
+    bottom: 7,
   },
 });
 

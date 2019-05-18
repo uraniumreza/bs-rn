@@ -28,6 +28,7 @@ class Notifications extends Component {
     await this.setState({ isLoading: true });
     const url = '/notifications';
     api.get(url).then((data) => {
+      console.log('Ha Ha - ', data);
       this.setState({ notifications: data, isLoading: false });
     });
   };
@@ -50,9 +51,8 @@ class Notifications extends Component {
           contentContainerStyle={{ paddingVertical: 15 }}
           data={notifications}
           renderItem={({ item }) => <NotificationThumbnail notification={item} />}
-          keyExtractor={item => item.id}
-          numColumns={2}
-          onRefresh={this.getProducts}
+          keyExtractor={item => item._id}
+          onRefresh={this.getNotifications}
           refreshing={isLoading}
         />
       </View>
