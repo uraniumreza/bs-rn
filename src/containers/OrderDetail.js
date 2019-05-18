@@ -21,7 +21,7 @@ const mapStateToProps = state => ({ user: state.user });
 
 class OrderDetail extends Component {
   static navigationOptions = () => ({
-    title: 'Order Detail',
+    title: 'অর্ডার ডিটেইল',
   });
 
   state = {
@@ -73,10 +73,10 @@ class OrderDetail extends Component {
           keyExtractor={item => item.product_id}
           numColumns={1}
         />
-        {order.state === 'Pending' && user.role !== 'sales' && (
+        {order.state === 'Processing' && user.role !== 'sales' && (
           <TouchableNativeFeedback onPress={this.confirmDelivery}>
             <View style={styles.buttonContainer}>
-              <Text style={styles.button}>ORDER RECEIVED</Text>
+              <Text style={styles.button}>অর্ডার রিসিভ করেছি</Text>
             </View>
           </TouchableNativeFeedback>
         )}
