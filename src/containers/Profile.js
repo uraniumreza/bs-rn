@@ -24,7 +24,7 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    api.get('/order').then((data) => {
+    api.get('/orders').then((data) => {
       console.log(data);
       this.setState({ orders: data, isLoading: false });
     });

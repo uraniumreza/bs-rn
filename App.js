@@ -5,6 +5,7 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import Icon from 'react-native-vector-icons/AntDesign';
 import Theme from './src/styles/Theme';
 import ProductsList from './src/containers/ProductsList';
+import Register from './src/containers/Register';
 import Login from './src/containers/Login';
 import Profile from './src/containers/Profile';
 import SplashScreen from './src/containers/SplashScreen';
@@ -75,6 +76,7 @@ const homeTabs = createMaterialBottomTabNavigator(
   {
     shifting: false,
     labeled: true,
+    lazy: false,
     activeColor: Theme.Primary,
     inactiveColor: Theme.Secondary,
     barStyle: {
@@ -119,6 +121,12 @@ const authStack = createSwitchNavigator(
   {
     Splash: {
       screen: SplashScreen,
+      navigationOptions: {
+        tabBarVisible: false,
+      },
+    },
+    Register: {
+      screen: Register,
       navigationOptions: {
         tabBarVisible: false,
       },

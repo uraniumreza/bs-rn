@@ -52,7 +52,7 @@ class Bag extends Component {
     await this.setState(() => ({ isBusy: true }));
     const data = [];
     bag.map(item => data.push({ product_id: item._id, ordered_quantity: item.quantity }));
-    api.post('/order', { products: data }).then(async () => {
+    api.post('/orders', { products: data }).then(async () => {
       await clearBag();
       await this.setState(() => ({ isBusy: false }));
       navigation.navigate('Profile');

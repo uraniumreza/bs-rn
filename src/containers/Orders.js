@@ -37,8 +37,8 @@ class Orders extends Component {
   };
 
   getOrders = () => {
-    api.get('/order').then((data) => {
-      console.log(data);
+    api.get('/orders').then((data) => {
+      console.log('::>', data);
       this.setState({ orders: data, isLoading: false });
     });
   };
@@ -57,12 +57,14 @@ class Orders extends Component {
           <Text style={styles.address}>{address}</Text>
         </View>
         <View style={styles.hr} />
-        {isLoading ? (
+        {isLoading && (
           <View style={commonStyles.container}>
             <ActivityIndicator size="large" color={Secondary} />
           </View>
-        ) : (
-          <Fragment>
+        )}
+
+        {orders.length > 0 && (
+          <View>
             <Text style={commonStyles.welcome}>YOUR ORDERS</Text>
             <FlatList
               contentContainerStyle={{ paddingVertical: 15 }}
@@ -73,7 +75,7 @@ class Orders extends Component {
               keyExtractor={order => order.order_id}
               numColumns={2}
             />
-          </Fragment>
+          </View>
         )}
       </View>
     );

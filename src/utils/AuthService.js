@@ -32,14 +32,27 @@ const login = (phone, password) => {
   };
 
   return api.post('/auth/login/', data).then(({ token, user }) => {
-    setToAS('TOKEN', token);
-    setToAS('USER', user);
-    setToAS('AUTH', data);
-    store.dispatch(setTokens(token));
-    store.dispatch(restoreUser(user));
-
+    setUserToken(token, user);
     return user;
   });
 };
 
-export { getFromAS, setToAS, login };
+const register = (data) => {
+  console.log(data);
+
+  return api.post('/auth/register/', { ...data, role: 'user' }).then(({ token, user }) => {
+    setUserToken(token, user);
+    return user;
+  });
+};
+
+const setUserToken = (token, user) => {
+  setToAS('TOKEN', token);
+  setToAS('USER', user);
+  store.dispatch(setTokens(token));
+  store.dispatch(restoreUser(user));
+};
+
+export {
+  getFromAS, setToAS, login, register,
+};

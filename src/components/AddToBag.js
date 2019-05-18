@@ -1,15 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableNativeFeedback,
-  LayoutAnimation,
-  ToastAndroid,
+  View, Text, StyleSheet, TouchableNativeFeedback, LayoutAnimation,
 } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/AntDesign';
 import theme from '../styles/Theme';
 import { addToBag, removeFromBag, updateQuantity } from '../actions';
 import QuantityController from './QuantityController';

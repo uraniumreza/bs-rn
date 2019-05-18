@@ -34,7 +34,7 @@ class OrderDetail extends Component {
 
     await this.setState(() => ({ isBusy: true }));
 
-    api.patch(`/order/${id}`, { state: 'Delivered' }).then(() => {
+    api.patch(`/orders/${id}`, { state: 'Delivered' }).then(() => {
       this.setState(() => ({ isBusy: false }));
       navigation.navigate('Profile');
     });

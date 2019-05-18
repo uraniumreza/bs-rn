@@ -25,7 +25,7 @@ class SplashScreen extends Component {
   }
 
   componentDidMount() {
-    getFromAS('AUTH').then(async (data) => {
+    getFromAS('TOKEN').then(async (data) => {
       if (!data) {
         setTimeout(() => {
           LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
@@ -79,15 +79,15 @@ class SplashScreen extends Component {
           <View style={buttonContainer}>
             <TouchableOpacity
               style={[button, { backgroundColor: Primary }]}
-              onPress={() => this.navigate('Login')}
+              onPress={() => this.navigate('Register')}
             >
-              <Text style={buttonText}>REGISTER</Text>
+              <Text style={buttonText}>রেজিস্টার</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[button, { backgroundColor: Secondary }]}
               onPress={() => this.navigate('Login')}
             >
-              <Text style={buttonText}>LOGIN</Text>
+              <Text style={buttonText}>লগ ইন</Text>
             </TouchableOpacity>
           </View>
         )}
