@@ -24,11 +24,15 @@ class Profile extends Component {
   }
 
   componentDidMount() {
+    this.getOrders();
+  }
+
+  getOrders = async () => {
+    await this.setState(() => ({ isLoading: true }));
     api.get('/orders').then((data) => {
-      console.log(data);
       this.setState({ orders: data, isLoading: false });
     });
-  }
+  };
 
   render() {
     const {
@@ -51,14 +55,21 @@ class Profile extends Component {
           <Text style={styles.address}>{address}</Text>
         </View>
         <View style={styles.hr} />
-        <Text style={commonStyles.welcome}>YOUR ORDERS</Text>
-        <FlatList
-          contentContainerStyle={{ paddingVertical: 15 }}
-          data={orders}
-          renderItem={({ item }) => <OrderThumbnail order={item} />}
-          keyExtractor={order => order.order_id}
-          numColumns={2}
-        />
+
+        {orders.length > 0 && (
+          <View>
+            <Text style={commonStyles.welcome}>YOUR ORDERS</Text>
+            <FlatList
+              contentContainerStyle={{ paddingVertical: 15 }}
+              data={orders}
+              renderItem={({ item }) => <OrderThumbnail order={item} />}
+              keyExtractor={order => order.order_id}
+              numColumns={2}
+              onRefresh={this.getOrders}
+              refreshing={isLoading}
+            />
+          </View>
+        )}
       </View>
     );
   }
