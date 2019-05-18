@@ -27,7 +27,7 @@ const mapDispatchToProps = { clearBag };
 
 class Bag extends Component {
   static navigationOptions = {
-    title: 'Your Bag',
+    title: 'আপনার ব্যাগ',
   };
 
   constructor(props) {
@@ -82,11 +82,13 @@ class Bag extends Component {
           keyExtractor={item => item._id}
           numColumns={1}
         />
-        <TouchableNativeFeedback onPress={this.placeOrder}>
-          <View style={styles.buttonContainer}>
-            <Text style={styles.button}>{` ORDER (TOTAL: ${this.calculateTotal()})`}</Text>
-          </View>
-        </TouchableNativeFeedback>
+        {bag.length > 0 && (
+          <TouchableNativeFeedback onPress={this.placeOrder}>
+            <View style={styles.buttonContainer}>
+              <Text style={styles.button}>{`অর্ডার করুন (মোট দাম: ${this.calculateTotal()})`}</Text>
+            </View>
+          </TouchableNativeFeedback>
+        )}
       </View>
     );
   }
