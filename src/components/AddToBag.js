@@ -22,7 +22,7 @@ class AddToBag extends Component {
 
     this.state = {
       isQuantityVisible: false,
-      quantity: 0,
+      quantity: 1,
     };
   }
 
@@ -61,13 +61,13 @@ class AddToBag extends Component {
       return (
         <TouchableNativeFeedback>
           <View style={styles.container}>
+            <Text style={styles.label}>পরিমাণ</Text>
             <QuantityController
               stock={stockCount}
               id={_id}
               quantity={quantity}
               hideQuantity={this.hideQuantity}
             />
-            <Text style={styles.label}>QUANTITY</Text>
           </View>
         </TouchableNativeFeedback>
       );
@@ -76,7 +76,7 @@ class AddToBag extends Component {
     return (
       <TouchableNativeFeedback onPress={this.showQuantity}>
         <View style={styles.container}>
-          <Text style={styles.button}>ADD TO BAG</Text>
+          <Text style={styles.button}>ব্যাগে এড করুন</Text>
         </View>
       </TouchableNativeFeedback>
     );
@@ -123,8 +123,7 @@ const styles = StyleSheet.create({
     fontSize: 19,
     lineHeight: 30,
     fontWeight: '600',
-    textAlign: 'right',
-    margin: 10,
+    textAlign: 'center',
     color: '#FFF',
     letterSpacing: 2,
   },
