@@ -44,7 +44,7 @@ const homeTabs = createMaterialBottomTabNavigator(
     Cosmetics: {
       screen: () => <ProductsList category="Cosmetics" />,
       navigationOptions: {
-        tabBarLabel: 'Cosmetics',
+        tabBarLabel: 'কসমেটিক্স',
         tabBarIcon: ({ tintColor }) => <Icon name="slack" size={19} color={tintColor} />,
       },
     },
@@ -52,7 +52,7 @@ const homeTabs = createMaterialBottomTabNavigator(
     Electronics: {
       screen: () => <ProductsList category="Electronics" />,
       navigationOptions: {
-        tabBarLabel: 'Electronics',
+        tabBarLabel: 'ইলেক্ট্রনিক্স',
         tabBarIcon: ({ tintColor }) => <Icon name="API" size={19} color={tintColor} />,
       },
     },
@@ -60,7 +60,7 @@ const homeTabs = createMaterialBottomTabNavigator(
     Accessories: {
       screen: () => <ProductsList category="Accessories" />,
       navigationOptions: {
-        tabBarLabel: 'Accessories',
+        tabBarLabel: 'এক্সেসরিস',
         tabBarIcon: ({ tintColor }) => <Icon name="USB" size={19} color={tintColor} />,
       },
     },
@@ -68,7 +68,7 @@ const homeTabs = createMaterialBottomTabNavigator(
     Profile: {
       screen: Profile,
       navigationOptions: {
-        tabBarLabel: 'Profile',
+        tabBarLabel: 'প্রোফাইল',
         tabBarIcon: ({ tintColor }) => <Icon name="user" size={19} color={tintColor} />,
       },
     },
