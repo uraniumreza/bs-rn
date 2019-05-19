@@ -15,3 +15,16 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+   public *;
+}
+
+-keep class io.invertase.firebase.** { *; }
+-dontwarn io.invertase.firebase.**
+
+-ignorewarnings
+
+-keep class * {
+    public private *;
+}
