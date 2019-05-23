@@ -77,7 +77,6 @@ const reducer = (state = initialState, action) => {
     }
 
     case ACTION_TYPES.SAVE_NOTIFICATIONS: {
-      console.log(payload);
       return {
         ...state,
         notifications: payload,

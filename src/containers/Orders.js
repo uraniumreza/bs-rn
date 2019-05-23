@@ -38,7 +38,6 @@ class Orders extends Component {
 
   getOrders = () => {
     api.get('/orders').then((data) => {
-      console.log('::>', data);
       this.setState({ orders: data, isLoading: false });
     });
   };

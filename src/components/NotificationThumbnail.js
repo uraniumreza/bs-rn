@@ -16,7 +16,7 @@ const NotificationThumbnail = ({
   const {
     container, messageText, date, image,
   } = styles;
-  console.log(_id, banner, message, createdAt);
+
   return (
     <View style={container} key={_id}>
       {banner && <Image source={{ uri: banner }} style={image} />}

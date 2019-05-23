@@ -37,14 +37,10 @@ const login = (phone, password) => {
   });
 };
 
-const register = (data) => {
-  console.log(data);
-
-  return api.post('/auth/register/', { ...data, role: 'user' }).then(({ token, user }) => {
-    setUserToken(token, user);
-    return user;
-  });
-};
+const register = data => api.post('/auth/register/', { ...data, role: 'user' }).then(({ token, user }) => {
+  setUserToken(token, user);
+  return user;
+});
 
 const setUserToken = (token, user) => {
   setToAS('TOKEN', token);

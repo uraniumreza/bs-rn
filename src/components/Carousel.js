@@ -7,6 +7,7 @@ import commonStyles from '../styles/CommonStyles';
 import { saveNotifications } from '../actions';
 import theme from '../styles/Theme';
 import api from '../utils/API';
+import Indicators from './Indicators';
 
 const { Secondary, width } = theme;
 
@@ -19,6 +20,7 @@ class Carousel extends Component {
     super(props);
     this.state = {
       isLoading: false,
+      currentPage: 0,
     };
   }
 
@@ -36,26 +38,49 @@ class Carousel extends Component {
     });
   };
 
+  handlePageChange = (e) => {
+    const { currentPage } = this.state;
+    const offset = e.nativeEvent.contentOffset;
+    if (offset) {
+      const page = Math.round(offset.x / width);
+      if (page !== currentPage) {
+        this.setState({ currentPage: page });
+      }
+    }
+  };
+
   render() {
-    const { isLoading } = this.state;
     const { container } = commonStyles;
     const { notifications } = this.props;
+    const { isLoading, currentPage } = this.state;
 
     if (isLoading) {
       return (
-        <View style={container}>
+        <View style={[container, { height: width / 2 }]}>
           <ActivityIndicator size="large" color={Secondary} />
         </View>
       );
     }
 
+    const featuredNotifications = notifications.filter(
+      notification => notification.image && notification,
+    );
+
     return (
       <View style={styles.scrollContainer}>
-        <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
-          {notifications.map(
-            ({ image }) => image && <Image style={styles.image} source={{ uri: image }} />,
-          )}
+        <ScrollView
+          horizontal
+          pagingEnabled
+          onMomentumScrollEnd={this.handlePageChange}
+          showsHorizontalScrollIndicator={false}
+        >
+          {featuredNotifications.map(({ image, _id }) => (
+            <Image key={_id} style={styles.image} source={{ uri: image }} />
+          ))}
         </ScrollView>
+        <View style={styles.indicators}>
+          <Indicators total={featuredNotifications.length} activeIndex={currentPage} />
+        </View>
       </View>
     );
   }
@@ -64,11 +89,18 @@ class Carousel extends Component {
 const styles = StyleSheet.create({
   scrollContainer: {
     height: width / 2,
+    position: 'relative',
   },
   image: {
     width,
     height: width / 2,
     resizeMode: 'cover',
+  },
+  indicators: {
+    position: 'absolute',
+    bottom: width * 0.033,
+    right: width * 0.033,
+    zIndex: 10,
   },
 });
 
