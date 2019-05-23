@@ -55,40 +55,42 @@ class OrderDetail extends Component {
     }
 
     return (
-      <ScrollView
-        contentContainerStyle={{
-          alignItems: 'flex-start',
-        }}
-        style={styles.scrollableContainer}
-      >
-        {user.role === 'sales' && (
-          <View style={{ width: theme.width }}>
-            <Text style={commonStyles.welcome}>কাস্টমারের ঠিকানা</Text>
-            <Text style={styles.bsName}>{order.user.shopName}</Text>
-            <Text style={styles.bsTitle}>{order.user.ownerName}</Text>
-            <Text style={styles.bsTitle}>{order.user.phone}</Text>
-            <Text style={styles.bsTitle}>{order.user.address}</Text>
-            <View style={styles.hr} />
-          </View>
-        )}
-        <View style={styles.header}>
-          <Text style={commonStyles.welcome}>{`ID - ${order.order_id}`}</Text>
-          <View style={styles.row}>
-            <View style={styles.priceContainer}>
-              <Text style={styles.price}>{order.total_price}</Text>
-              <Text style={styles.taka}>{'\u09F3'}</Text>
+      <View style={{ position: 'relative', flex: 1 }}>
+        <ScrollView
+          contentContainerStyle={{
+            alignItems: 'flex-start',
+          }}
+          style={styles.scrollableContainer}
+        >
+          {user.role === 'sales' && (
+            <View style={{ width: theme.width }}>
+              <Text style={commonStyles.welcome}>কাস্টমারের ঠিকানা</Text>
+              <Text style={styles.bsName}>{order.user.shopName}</Text>
+              <Text style={styles.bsTitle}>{order.user.ownerName}</Text>
+              <Text style={styles.bsTitle}>{order.user.phone}</Text>
+              <Text style={styles.bsTitle}>{order.user.address}</Text>
+              <View style={styles.hr} />
             </View>
-            <Text style={styles.date}>{new Date(order.createdAt).toDateString()}</Text>
-            <Text style={[styles.state, { color: COLORS[order.state] }]}>{order.state}</Text>
+          )}
+          <View style={styles.header}>
+            <Text style={commonStyles.welcome}>{`ID - ${order.order_id}`}</Text>
+            <View style={styles.row}>
+              <View style={styles.priceContainer}>
+                <Text style={styles.price}>{order.total_price}</Text>
+                <Text style={styles.taka}>{'\u09F3'}</Text>
+              </View>
+              <Text style={styles.date}>{new Date(order.createdAt).toDateString()}</Text>
+              <Text style={[styles.state, { color: COLORS[order.state] }]}>{order.state}</Text>
+            </View>
           </View>
-        </View>
-        <FlatList
-          contentContainerStyle={{ paddingVertical: 15 }}
-          data={order.products}
-          renderItem={({ item }) => <OrderItem product={item} />}
-          keyExtractor={item => item.product_id}
-          numColumns={1}
-        />
+          <FlatList
+            contentContainerStyle={{ paddingVertical: 15 }}
+            data={order.products}
+            renderItem={({ item }) => <OrderItem product={item} />}
+            keyExtractor={item => item.product_id}
+            numColumns={1}
+          />
+        </ScrollView>
         {order.state === 'Processing' && user.role !== 'sales' && (
           <TouchableNativeFeedback onPress={this.confirmDelivery}>
             <View style={styles.buttonContainer}>
@@ -96,17 +98,15 @@ class OrderDetail extends Component {
             </View>
           </TouchableNativeFeedback>
         )}
-      </ScrollView>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   scrollableContainer: {
-    flex: 1,
     paddingTop: 10,
     backgroundColor: '#FFF',
-    position: 'relative',
     paddingHorizontal: width * 0.04,
   },
   header: {
@@ -157,7 +157,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     left: 0,
-    marginLeft: -16,
   },
   button: {
     fontSize: 19,

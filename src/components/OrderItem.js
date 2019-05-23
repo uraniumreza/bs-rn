@@ -5,8 +5,6 @@ import {
 import PropTypes from 'prop-types';
 import theme from '../styles/Theme';
 
-import QuantityController from './QuantityController';
-
 const { width } = theme;
 
 const OrderItem = ({
@@ -19,24 +17,22 @@ const OrderItem = ({
   } = styles;
 
   return (
-    <View>
-      <View style={container}>
-        <Image
-          source={{
-            uri: productImage,
-          }}
-          style={image}
-        />
-        <View>
-          <Text style={name}>{productName}</Text>
-          <View style={priceStockContainer}>
-            <View style={priceContainer}>
-              <Text style={price}>{finalPrice}</Text>
-              <Text style={taka}>{'\u09F3'}</Text>
-            </View>
+    <View style={container}>
+      <Image
+        source={{
+          uri: productImage,
+        }}
+        style={image}
+      />
+      <View>
+        <Text style={name}>{productName}</Text>
+        <View style={priceStockContainer}>
+          <View style={priceContainer}>
+            <Text style={price}>{finalPrice}</Text>
+            <Text style={taka}>{'\u09F3'}</Text>
           </View>
-          <Text style={styles.name}>{`x${quantiy}`}</Text>
         </View>
+        <Text style={styles.name}>{`x${quantiy}`}</Text>
       </View>
     </View>
   );
@@ -49,8 +45,10 @@ const styles = StyleSheet.create({
     marginBottom: width * 0.035,
     backgroundColor: '#ffffff',
     borderWidth: 0.5,
+    borderRadius: 4,
     borderColor: '#d5d6d9',
     flexDirection: 'row',
+    elevation: 2,
   },
   image: {
     width: width * 0.3,

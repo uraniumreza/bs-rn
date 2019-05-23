@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { withNavigation } from 'react-navigation';
 import theme from '../styles/Theme';
 
-const { width, Primary, COLORS } = theme;
+const { width, COLORS } = theme;
 
 const OrderThumbnail = ({ navigation, order: { order_id: orderId, state }, order }) => {
   const navigateToOrderDetail = () => {
@@ -35,7 +35,9 @@ const styles = StyleSheet.create({
     marginLeft: width * 0.033,
     backgroundColor: '#ffffff',
     borderWidth: 0.5,
+    borderRadius: 2,
     borderColor: '#d5d6d9',
+    elevation: 1,
   },
   name: {
     fontWeight: 'bold',
