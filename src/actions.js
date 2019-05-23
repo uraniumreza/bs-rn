@@ -34,3 +34,8 @@ export const updateQuantity = (id, quantity) => ({
   type: ACTION_TYPES.UPDATE_QUANTITY,
   payload: { id, quantity },
 });
+
+export const saveNotifications = notifications => ({
+  type: ACTION_TYPES.SAVE_NOTIFICATIONS,
+  payload: notifications,
+});

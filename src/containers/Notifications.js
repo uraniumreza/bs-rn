@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, ActivityIndicator, FlatList } from 'react-native';
+import { connect } from 'react-redux';
 import styles from '../styles/CommonStyles';
 import NotificationThumbnail from '../components/NotificationThumbnail';
+import { saveNotifications } from '../actions';
 import theme from '../styles/Theme';
 import api from '../utils/API';
 
@@ -15,8 +17,7 @@ class Notifications extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notifications: [],
-      isLoading: true,
+      isLoading: false,
     };
   }
 
@@ -25,17 +26,19 @@ class Notifications extends Component {
   }
 
   getNotifications = async () => {
-    await this.setState({ isLoading: true });
+    const { notifications, saveNotifications } = this.props;
+    if (notifications.length === 0) await this.setState({ isLoading: true });
     const url = '/notifications';
-    api.get(url).then((data) => {
-      console.log('Ha Ha - ', data);
-      this.setState({ notifications: data, isLoading: false });
+    api.get(url).then(async (data) => {
+      await saveNotifications(data);
+      this.setState({ isLoading: false });
     });
   };
 
   render() {
     const { container } = styles;
-    const { isLoading, notifications } = this.state;
+    const { isLoading } = this.state;
+    const { notifications } = this.props;
 
     if (isLoading) {
       return (
@@ -60,4 +63,13 @@ class Notifications extends Component {
   }
 }
 
-export default Notifications;
+const mapStateToProps = state => ({
+  notifications: state.notifications,
+});
+
+const mapDispatchToProps = { saveNotifications };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Notifications);

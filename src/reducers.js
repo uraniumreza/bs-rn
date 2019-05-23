@@ -3,6 +3,7 @@ import ACTION_TYPES from './constants/ActionTypes';
 
 const initialState = {
   temporaryValue: 1,
+  notifications: [],
   tokens: null,
   user: null,
   bag: [],
@@ -72,6 +73,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         bag: newBag,
+      };
+    }
+
+    case ACTION_TYPES.SAVE_NOTIFICATIONS: {
+      console.log(payload);
+      return {
+        ...state,
+        notifications: payload,
       };
     }
   }
