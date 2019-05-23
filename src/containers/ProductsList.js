@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { View, ActivityIndicator, FlatList } from 'react-native';
 import styles from '../styles/CommonStyles';
 import ProductThumbnail from '../components/ProductThumbnail';
+import Carousel from '../components/Carousel';
 import Fab from '../components/Fab';
 import theme from '../styles/Theme';
 import api from '../utils/API';
@@ -33,6 +34,7 @@ class ProductList extends Component {
 
   render() {
     const { container } = styles;
+    const { category } = this.props;
     const { isLoading, products } = this.state;
 
     if (isLoading) {
@@ -46,7 +48,8 @@ class ProductList extends Component {
     return (
       <View style={{ flex: 1 }}>
         <FlatList
-          contentContainerStyle={{ paddingVertical: 15 }}
+          contentContainerStyle={{ paddingBottom: 15 }}
+          ListHeaderComponent={category === 'Cosmetics' && <Carousel />}
           data={products}
           renderItem={({ item }) => <ProductThumbnail product={item} />}
           keyExtractor={item => item.id}

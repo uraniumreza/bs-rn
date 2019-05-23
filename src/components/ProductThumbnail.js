@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   container: {
     width: width * 0.45,
     padding: 10,
-    marginBottom: width * 0.035,
+    marginTop: width * 0.035,
     marginLeft: width * 0.033,
     backgroundColor: '#ffffff',
     borderWidth: 0.5,
