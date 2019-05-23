@@ -66,23 +66,25 @@ class Carousel extends Component {
       notification => notification.image && notification,
     );
 
-    return (
-      <View style={styles.scrollContainer}>
-        <ScrollView
-          horizontal
-          pagingEnabled
-          onMomentumScrollEnd={this.handlePageChange}
-          showsHorizontalScrollIndicator={false}
-        >
-          {featuredNotifications.map(({ image, _id }) => (
-            <Image key={_id} style={styles.image} source={{ uri: image }} />
-          ))}
-        </ScrollView>
-        <View style={styles.indicators}>
-          <Indicators total={featuredNotifications.length} activeIndex={currentPage} />
+    if (featuredNotifications.length > 0) {
+      return (
+        <View style={styles.scrollContainer}>
+          <ScrollView
+            horizontal
+            pagingEnabled
+            onMomentumScrollEnd={this.handlePageChange}
+            showsHorizontalScrollIndicator={false}
+          >
+            {featuredNotifications.map(({ image, _id }) => (
+              <Image key={_id} style={styles.image} source={{ uri: image }} />
+            ))}
+          </ScrollView>
+          <View style={styles.indicators}>
+            <Indicators total={featuredNotifications.length} activeIndex={currentPage} />
+          </View>
         </View>
-      </View>
-    );
+      );
+    } return null;
   }
 }
 
