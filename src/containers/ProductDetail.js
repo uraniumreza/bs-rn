@@ -6,7 +6,6 @@ import commonStyles from '../styles/CommonStyles';
 import api from '../utils/API';
 import theme from '../styles/Theme';
 import AddToBag from '../components/AddToBag';
-import Fab from '../components/Fab';
 import NotificationIcon from '../components/NotificationIcon';
 
 const { Secondary, width } = theme;
@@ -58,19 +57,16 @@ class ProductDetail extends Component {
 
     return (
       <View style={scrollableContainer}>
-        <ScrollView style={{ marginBottom: 58 }}>
+        <ScrollView style={{ width: width * 0.92, marginBottom: 55, paddingBottom: 20 }}>
           <Image source={{ uri: product.image }} style={image} />
           <Text style={name}>{product.name}</Text>
           <View style={priceContainer}>
             <Text style={price}>{product.price - product.discount}</Text>
             <Text style={taka}>{'\u09F3'}</Text>
           </View>
-          <Text style={description} numberOfLines={5}>
-            {product.description}
-          </Text>
+          <Text style={description}>{product.description}</Text>
           {product.color && <Text style={color}>{`Color: ${product.color}`}</Text>}
         </ScrollView>
-        <Fab style={{ bottom: 70, right: 0 }} />
         {product && <AddToBag product={product} />}
       </View>
     );
@@ -92,7 +88,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   name: {
-    width: width * 0.92,
     fontWeight: 'bold',
     marginTop: 15,
     lineHeight: 27,
@@ -101,10 +96,10 @@ const styles = StyleSheet.create({
     color: '#313131',
   },
   description: {
-    width: width * 0.92,
-    marginTop: 10,
+    paddingTop: 10,
     letterSpacing: 1.5,
-    fontSize: 14,
+    fontSize: 16,
+    lineHeight: 20,
     color: '#515151',
   },
   priceContainer: {
@@ -124,10 +119,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   color: {
-    width: width * 0.92,
-    marginTop: 10,
+    marginVertical: 10,
     letterSpacing: 1.5,
-    fontSize: 15,
+    fontSize: 16,
     color: '#515151',
   },
 });
