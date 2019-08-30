@@ -1,4 +1,4 @@
-package com.barbersaloon;
+package com.salongallery;
 
 import android.app.Application;
 import com.facebook.react.ReactApplication;
