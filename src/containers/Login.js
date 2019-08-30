@@ -32,7 +32,7 @@ class Login extends Component {
     const user = await login(contactNo, password);
 
     if (user?.role === 'sales') navigation.navigate('SR');
-    else if (user?.role === 'user') navigation.navigate('App');
+    else if (user?.role === 'user' || user?.role === 'admin') navigation.navigate('App');
     else {
       this.setState(() => ({ isBusy: false }));
       ToastAndroid.show('আপনার ফোন নাম্বার, পাসওয়ার্ড পুনরায় চেক করুন', ToastAndroid.LONG);
