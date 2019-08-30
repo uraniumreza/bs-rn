@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.salongallery">
+  package="com.barbersaloon">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
