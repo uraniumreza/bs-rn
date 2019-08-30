@@ -37,6 +37,7 @@ class ProductDetail extends Component {
     const { container } = commonStyles;
     const {
       scrollableContainer,
+      productContainer,
       image,
       name,
       description,
@@ -57,7 +58,7 @@ class ProductDetail extends Component {
 
     return (
       <View style={scrollableContainer}>
-        <ScrollView style={{ width: width * 0.92, marginBottom: 55, paddingBottom: 20 }}>
+        <ScrollView style={productContainer}>
           <Image source={{ uri: product.image }} style={image} />
           <Text style={name}>{product.name}</Text>
           <View style={priceContainer}>
@@ -77,10 +78,13 @@ const styles = StyleSheet.create({
   scrollableContainer: {
     flex: 1,
     alignItems: 'flex-start',
-    paddingTop: 10,
     backgroundColor: '#FFF',
     position: 'relative',
-    marginHorizontal: width * 0.04,
+  },
+  productContainer: {
+    paddingTop: 10,
+    paddingHorizontal: width * 0.04,
+    marginBottom: 55,
   },
   image: {
     width: width * 0.92,
@@ -92,14 +96,13 @@ const styles = StyleSheet.create({
     marginTop: 15,
     lineHeight: 27,
     letterSpacing: 1.5,
-    fontSize: 20,
+    fontSize: 21,
     color: '#313131',
   },
   description: {
     paddingTop: 10,
     letterSpacing: 1.5,
-    fontSize: 16,
-    lineHeight: 20,
+    fontSize: 17,
     color: '#515151',
   },
   priceContainer: {
@@ -119,10 +122,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   color: {
-    marginVertical: 10,
     letterSpacing: 1.5,
     fontSize: 16,
     color: '#515151',
+    marginBottom: 50,
   },
 });
 
