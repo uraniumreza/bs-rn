@@ -41,9 +41,12 @@ class ProductDetail extends Component {
       image,
       name,
       description,
+      allPriceContainer,
       priceContainer,
       price,
       taka,
+      discountPrice,
+      discountTaka,
       color,
     } = styles;
     const { isLoading, product } = this.state;
@@ -61,11 +64,19 @@ class ProductDetail extends Component {
         <ScrollView style={productContainer}>
           <Image source={{ uri: product.image }} style={image} />
           <Text style={name}>{product.name}</Text>
-          <View style={priceContainer}>
-            <Text style={price}>{product.price - product.discount}</Text>
-            <Text style={taka}>{'\u09F3'}</Text>
+          <View style={allPriceContainer}>
+            <View style={priceContainer}>
+              <Text style={price}>{product.price - product.discount}</Text>
+              <Text style={taka}>{'\u09F3'}</Text>
+            </View>
+            {product.discount > 0 && (
+              <View style={priceContainer}>
+                <Text style={discountPrice}>{product.price}</Text>
+                <Text style={discountTaka}>{'\u09F3'}</Text>
+              </View>
+            )}
           </View>
-          <Text style={description}>{product.description}</Text>
+          <Text style={description}>{`${product.description}\n`}</Text>
           {product.color && <Text style={color}>{`Color: ${product.color}`}</Text>}
         </ScrollView>
         {product && <AddToBag product={product} />}
@@ -102,8 +113,13 @@ const styles = StyleSheet.create({
   description: {
     paddingTop: 10,
     letterSpacing: 1.5,
-    fontSize: 17,
+    fontSize: 15,
     color: '#515151',
+  },
+  allPriceContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   priceContainer: {
     flexDirection: 'row',
@@ -112,13 +128,29 @@ const styles = StyleSheet.create({
   price: {
     marginTop: 5,
     fontSize: 30,
-    color: '#444',
+    color: 'green',
     fontWeight: 'bold',
+  },
+  discountPrice: {
+    marginTop: 5,
+    marginLeft: 12,
+    fontSize: 22,
+    color: 'red',
+    fontWeight: 'bold',
+    textDecorationLine: 'line-through',
+    textDecorationStyle: 'solid',
+    textDecorationColor: 'red',
   },
   taka: {
     fontSize: 16,
     lineHeight: 30,
-    color: '#333',
+    color: 'green',
+    fontWeight: 'bold',
+  },
+  discountTaka: {
+    fontSize: 12,
+    lineHeight: 30,
+    color: 'red',
     fontWeight: 'bold',
   },
   color: {
