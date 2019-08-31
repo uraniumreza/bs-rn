@@ -25,7 +25,9 @@ const ProductThumbnail = ({
     name,
     priceContainer,
     price,
+    discountPrice,
     taka,
+    discountTaka,
     priceStockContainer,
     stockContainer,
   } = styles;
@@ -34,7 +36,7 @@ const ProductThumbnail = ({
     if (stockCount === 0) ToastAndroid.show('Sorry; this product is out of stock!', ToastAndroid.LONG);
     else navigation.navigate('ProductDetail', { productId: id });
   };
-
+  console.log(productName, originalPrice, discount);
   return (
     <TouchableNativeFeedback onPress={navigateToProductDetail}>
       <View style={container}>
@@ -52,6 +54,12 @@ const ProductThumbnail = ({
             <Text style={price}>{originalPrice - discount}</Text>
             <Text style={taka}>{'\u09F3'}</Text>
           </View>
+          {discount > 0 && (
+            <View style={priceContainer}>
+              <Text style={discountPrice}>{originalPrice}</Text>
+              <Text style={discountTaka}>{'\u09F3'}</Text>
+            </View>
+          )}
           {stockCount === 0 && <Text style={stockContainer}>STOCK OUT</Text>}
         </View>
       </View>
@@ -86,7 +94,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
   },
   stockContainer: {
     fontSize: 11,
@@ -102,12 +110,28 @@ const styles = StyleSheet.create({
   price: {
     marginTop: 5,
     fontSize: 14,
-    color: '#444',
+    fontWeight: 'bold',
+    color: 'green',
+  },
+  discountPrice: {
+    marginTop: 5,
+    marginLeft: 5,
+    textDecorationLine: 'line-through',
+    textDecorationStyle: 'solid',
+    textDecorationColor: 'red',
+    color: 'red',
+    fontSize: 12,
   },
   taka: {
     fontSize: 11,
     lineHeight: 20,
-    color: '#333',
+    color: 'green',
+    fontWeight: 'bold',
+  },
+  discountTaka: {
+    fontSize: 9,
+    lineHeight: 20,
+    color: 'red',
   },
 });
 
