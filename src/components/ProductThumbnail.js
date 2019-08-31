@@ -36,7 +36,7 @@ const ProductThumbnail = ({
     if (stockCount === 0) ToastAndroid.show('Sorry; this product is out of stock!', ToastAndroid.LONG);
     else navigation.navigate('ProductDetail', { productId: id });
   };
-  console.log(productName, originalPrice, discount);
+
   return (
     <TouchableNativeFeedback onPress={navigateToProductDetail}>
       <View style={container}>

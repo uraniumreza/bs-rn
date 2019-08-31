@@ -49,7 +49,6 @@ class QuantityController extends Component {
                   quantity: prevState.quantity - 1,
                 }));
                 if (hideQuantity) hideQuantity();
-                console.log('YES Pressed');
               },
             },
           ],
