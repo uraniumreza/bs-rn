@@ -74,7 +74,7 @@ class SplashScreen extends Component {
       <View style={container}>
         <Image style={logo} source={logoImage} />
         {phase === 1 ? (
-          <Text style={welcome}>BARBER SALOON</Text>
+          <Text style={welcome}>SALOON GALLERY</Text>
         ) : (
           <View style={buttonContainer}>
             <TouchableOpacity
@@ -98,8 +98,8 @@ class SplashScreen extends Component {
 
 const styles = StyleSheet.create({
   logo: {
-    width: width * 0.3,
-    height: width * 0.3,
+    width: width * 0.45,
+    height: width * 0.45,
     resizeMode: 'contain',
   },
   buttonContainer: {
