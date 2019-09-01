@@ -58,13 +58,21 @@ class Profile extends Component {
       <View style={styles.hr} />
       <View style={{ paddingBottom: 20 }}>
         <Text style={commonStyles.welcome}>যোগাযোগ</Text>
-        <Text style={styles.bsName}>R K SHARKAR BAPPY</Text>
-        <Text style={styles.bsTitle}>General Manager</Text>
-        <Text style={styles.bsTitle}>01772784263</Text>
-        <Text style={styles.bsTitle}>bstradingbd@yahoo.com</Text>
-        <Text style={styles.bsTitle}>facebook.com/BSTradingBD</Text>
-        <Text style={styles.bsTitle}>Hazi Muslim Market, 23, Ali Hossain Road</Text>
+        <Text style={styles.bsName}>SALES OFFICE</Text>
+        <Text style={styles.bsTitle}>
+          78, Shahid Syed Nazrul Islam Sharani (1st Floor), Bangshal, Dhaka-1100
+        </Text>
+        <View style={{ marginVertical: 10 }} />
+        <Text style={styles.bsName}>HEAD OFFICE</Text>
+        <Text style={styles.bsTitle}>23, Hazi Muslim Market, Ali Hossain Road</Text>
         <Text style={styles.bsTitle}>Shop 4, Moulovi Bazar, Dhaka-1100</Text>
+        <View style={{ marginVertical: 10 }} />
+        <Text style={styles.bsName}>HELPLINE</Text>
+        <Text style={styles.bsTitle}>01972-016102, 01772-784263</Text>
+        <View style={{ marginVertical: 10 }} />
+        <Text style={styles.bsName}>EMAIL & FACEBOOK</Text>
+        <Text style={[styles.bsTitle, styles.link]}>bstradingbd@yahoo.com</Text>
+        <Text style={[styles.bsTitle, styles.link]}>facebook.com/BSTradingBD</Text>
       </View>
     </Fragment>
   );
@@ -138,7 +146,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'left',
     marginHorizontal: 15,
-    letterSpacing: 3,
+    letterSpacing: 2,
     color: '#4C516D',
   },
   bsTitle: {
@@ -146,6 +154,9 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginHorizontal: 15,
     color: '#4C516D',
+  },
+  link: {
+    fontStyle: 'italic',
   },
 });
 
