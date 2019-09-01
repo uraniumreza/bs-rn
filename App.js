@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Easing, Image } from 'react-native';
+import { Animated, Easing, Text } from 'react-native';
 import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -16,7 +16,6 @@ import Orders from './src/containers/Orders';
 import NotificationIcon from './src/components/NotificationIcon';
 import Notifications from './src/containers/Notifications';
 import styles from './src/styles/CommonStyles';
-import BrandLogo from './assets/images/BS_Trading.png';
 
 const transitionConfig = () => ({
   transitionSpec: {
@@ -91,7 +90,7 @@ const appStack = createStackNavigator(
     homeTabs: {
       screen: homeTabs,
       navigationOptions: ({ navigation }) => ({
-        headerTitle: <Image style={styles.headerImage} source={BrandLogo} />,
+        headerTitle: <Text style={styles.headerText}>BS Saloon Gallery</Text>,
         headerRight: <NotificationIcon navigation={navigation} />,
       }),
     },

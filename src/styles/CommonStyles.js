@@ -27,10 +27,10 @@ const CommonStyles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
-  headerImage: {
-    width: 100,
-    height: 50,
-    resizeMode: 'contain',
+  headerText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#2ecc71',
     marginLeft: 15,
   },
   headerButton: {
